@@ -1,0 +1,157 @@
+{
+  "name": "sbomai-vscode",
+  "displayName": "SBOMAI - AI-Powered SBOM Analysis",
+  "description": "VSCode extension for AI-powered SBOM analysis with real-time vulnerability scanning and policy enforcement",
+  "version": "1.0.0",
+  "publisher": "sbomai",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other",
+    "Security",
+    "Testing"
+  ],
+  "keywords": [
+    "sbom",
+    "security",
+    "vulnerability",
+    "analysis",
+    "ai",
+    "compliance"
+  ],
+  "activationEvents": [
+    "onCommand:sbomai.analyzeFile",
+    "onCommand:sbomai.analyzeWorkspace",
+    "onCommand:sbomai.showResults",
+    "onCommand:sbomai.configure",
+    "onView:sbomai.resultsView"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "sbomai.analyzeFile",
+        "title": "SBOMAI: Analyze Current File",
+        "category": "SBOMAI"
+      },
+      {
+        "command": "sbomai.analyzeWorkspace",
+        "title": "SBOMAI: Analyze Workspace",
+        "category": "SBOMAI"
+      },
+      {
+        "command": "sbomai.showResults",
+        "title": "SBOMAI: Show Analysis Results",
+        "category": "SBOMAI"
+      },
+      {
+        "command": "sbomai.configure",
+        "title": "SBOMAI: Configure Settings",
+        "category": "SBOMAI"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "sbomai.resultsView",
+          "name": "SBOMAI Analysis Results"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "sbomai",
+          "title": "SBOMAI",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "sbomai": [
+        {
+          "id": "sbomai.resultsView",
+          "name": "Analysis Results"
+        },
+        {
+          "id": "sbomai.vulnerabilitiesView",
+          "name": "Vulnerabilities"
+        },
+        {
+          "id": "sbomai.policiesView",
+          "name": "Policy Violations"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "SBOMAI",
+      "properties": {
+        "sbomai.serverUrl": {
+          "type": "string",
+          "default": "http://localhost:8080",
+          "description": "SBOMAI core service URL"
+        },
+        "sbomai.apiKey": {
+          "type": "string",
+          "description": "SBOMAI API key for authentication"
+        },
+        "sbomai.autoAnalyze": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically analyze SBOM files when opened"
+        },
+        "sbomai.showNotifications": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show notifications for analysis results"
+        },
+        "sbomai.failOnCritical": {
+          "type": "boolean",
+          "default": true,
+          "description": "Fail analysis if critical vulnerabilities are found"
+        }
+      }
+    },
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "sbomai.analyzeFile",
+          "group": "navigation",
+          "when": "resourceExtname == .spdx || resourceExtname == .cyclonedx || resourceExtname == .json"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "sbomai.analyzeFile",
+          "when": "editorTextFocus"
+        },
+        {
+          "command": "sbomai.analyzeWorkspace"
+        },
+        {
+          "command": "sbomai.showResults"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
+    "eslint": "^8.26.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+} 

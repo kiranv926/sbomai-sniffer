@@ -1,0 +1,8 @@
+com\sbomai\vulnscan\ports\VulnerabilityScanException.class
+com\sbomai\vulnscan\domain\Severity.class
+com\sbomai\vulnscan\domain\VulnerabilitySource.class
+com\sbomai\vulnscan\ports\VulnerabilityScanner$ComponentInfo.class
+com\sbomai\vulnscan\ports\ScannerInfo.class
+com\sbomai\vulnscan\domain\Vulnerability.class
+com\sbomai\vulnscan\SbomaiVulnscanApplication.class
+com\sbomai\vulnscan\ports\VulnerabilityScanner.class

@@ -1,0 +1,7 @@
+com\sbomai\policy\ports\PolicyConfiguration.class
+com\sbomai\policy\ports\PolicyEnforcer.class
+com\sbomai\policy\SbomaiPolicyApplication.class
+com\sbomai\policy\ports\PolicyEnforcementException.class
+com\sbomai\policy\domain\PolicyType.class
+com\sbomai\policy\domain\Severity.class
+com\sbomai\policy\domain\PolicyViolation.class

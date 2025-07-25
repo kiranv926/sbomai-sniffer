@@ -1,0 +1,40 @@
+# SBOMAI CLI Application Configuration
+spring:
+  application:
+    name: sbomai-cli
+  
+  # Disable web server for CLI
+  main:
+    web-application-type: none
+
+# CLI Configuration
+sbomai:
+  cli:
+    # Default settings
+    default:
+      remote-url: http://localhost:8080
+      output-format: TEXT
+      timeout: 300000 # 5 minutes
+    
+    # Remote API settings
+    remote:
+      connection-timeout: 30000 # 30 seconds
+      read-timeout: 300000 # 5 minutes
+      max-retries: 3
+      retry-delay: 1000 # 1 second
+    
+    # Local analysis settings
+    local:
+      enable-parallel-processing: true
+      max-concurrent-analyses: 5
+
+# Logging Configuration
+logging:
+  level:
+    com.sbomai.cli: INFO
+    org.springframework.web: WARN
+  pattern:
+    console: "%d{HH:mm:ss} - %msg%n"
+
+# Disable banner for CLI
+spring.main.banner-mode: off 

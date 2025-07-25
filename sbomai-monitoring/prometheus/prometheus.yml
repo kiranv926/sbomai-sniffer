@@ -1,0 +1,73 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+scrape_configs:
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # SBOMAI Core Service
+  - job_name: 'sbomai-core'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8080']
+    scrape_interval: 10s
+    scrape_timeout: 5s
+
+  # SBOMAI Parser Service
+  - job_name: 'sbomai-parser'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8081']
+    scrape_interval: 10s
+    scrape_timeout: 5s
+
+  # SBOMAI Vulnerability Scanner Service
+  - job_name: 'sbomai-vulnscan'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8082']
+    scrape_interval: 10s
+    scrape_timeout: 5s
+
+  # SBOMAI Policy Service
+  - job_name: 'sbomai-policy'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8083']
+    scrape_interval: 10s
+    scrape_timeout: 5s
+
+  # SBOMAI CLI (if running as service)
+  - job_name: 'sbomai-cli'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8084']
+    scrape_interval: 10s
+    scrape_timeout: 5s
+
+  # SBOMAI Live Feed Service
+  - job_name: 'sbomai-livefeed'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8085']
+    scrape_interval: 10s
+    scrape_timeout: 5s
+
+  # Node Exporter (for system metrics)
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['host.docker.internal:9100']
+    scrape_interval: 30s
+
+  # cAdvisor (for container metrics)
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['host.docker.internal:8080']
+    scrape_interval: 30s 

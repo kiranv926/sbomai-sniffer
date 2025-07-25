@@ -1,0 +1,71 @@
+name: 'SBOMAI Analysis'
+description: 'AI-powered SBOM analysis for security and compliance'
+author: 'SBOMAI Team'
+
+inputs:
+  sbom-file:
+    description: 'Path to the SBOM file to analyze'
+    required: true
+    default: 'bom.spdx'
+  
+  sbom-format:
+    description: 'SBOM format (SPDX, CYCLONEDX, SWID, AUTO)'
+    required: false
+    default: 'AUTO'
+  
+  sbomai-url:
+    description: 'SBOMAI core service URL'
+    required: false
+    default: 'http://localhost:8080'
+  
+  fail-on-critical:
+    description: 'Fail the action if critical vulnerabilities are found'
+    required: false
+    default: 'true'
+  
+  fail-on-high:
+    description: 'Fail the action if high severity vulnerabilities are found'
+    required: false
+    default: 'false'
+  
+  create-issue:
+    description: 'Create GitHub issue for policy violations'
+    required: false
+    default: 'false'
+  
+  issue-labels:
+    description: 'Labels to add to created issues'
+    required: false
+    default: 'security,sbom,vulnerability'
+  
+  output-format:
+    description: 'Output format for results (JSON, TEXT, HTML)'
+    required: false
+    default: 'TEXT'
+  
+  verbose:
+    description: 'Enable verbose output'
+    required: false
+    default: 'false'
+
+outputs:
+  vulnerabilities-found:
+    description: 'Number of vulnerabilities found'
+  critical-vulnerabilities:
+    description: 'Number of critical vulnerabilities found'
+  high-vulnerabilities:
+    description: 'Number of high severity vulnerabilities found'
+  policy-violations:
+    description: 'Number of policy violations found'
+  analysis-status:
+    description: 'Status of the analysis (SUCCESS, FAILED, WARNING)'
+  results-file:
+    description: 'Path to the detailed results file'
+
+runs:
+  using: 'java17'
+  main: 'com.sbomai.github.SbomaiGitHubAction'
+
+branding:
+  icon: 'shield'
+  color: 'blue' 
