@@ -73,6 +73,7 @@ sbomai:
     
     # AI Analysis Configuration
     ai:
+      provider: auto  # auto, openai, local
       openai:
         enabled: true
         api-key: ${OPENAI_API_KEY:}
@@ -80,7 +81,7 @@ sbomai:
         max-tokens: 4000
         temperature: 0.3
       local:
-        enabled: false
+        enabled: true  # Enable local AI by default
         model-path: ${LOCAL_MODEL_PATH:}
     
     # Policy Enforcement Configuration

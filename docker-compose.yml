@@ -1,14 +1,136 @@
 version: '3.8'
 
 services:
-  # Prometheus for metrics collection
+  # SBOMAI Java Services
+  sbomai-parser:
+    build:
+      context: .
+      dockerfile: sbomai-parser/Dockerfile
+    container_name: sbomai-parser
+    ports:
+      - "8081:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SERVER_PORT=8080
+    networks:
+      - sbomai-network
+    restart: unless-stopped
+    depends_on:
+      - redis
+
+  sbomai-vulnscan:
+    build:
+      context: .
+      dockerfile: sbomai-vulnscan/Dockerfile
+    container_name: sbomai-vulnscan
+    ports:
+      - "8082:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SERVER_PORT=8080
+    networks:
+      - sbomai-network
+    restart: unless-stopped
+    depends_on:
+      - redis
+
+  sbomai-policy:
+    build:
+      context: .
+      dockerfile: sbomai-policy/Dockerfile
+    container_name: sbomai-policy
+    ports:
+      - "8083:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SERVER_PORT=8080
+    networks:
+      - sbomai-network
+    restart: unless-stopped
+    depends_on:
+      - redis
+
+  sbomai-core:
+    build:
+      context: ./sbomai-core
+      dockerfile: Dockerfile
+    container_name: sbomai-core
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SERVER_PORT=8080
+      - SBOMAI_PARSER_URL=http://sbomai-parser:8080
+      - SBOMAI_VULNSCAN_URL=http://sbomai-vulnscan:8080
+      - SBOMAI_POLICY_URL=http://sbomai-policy:8080
+    networks:
+      - sbomai-network
+    restart: unless-stopped
+    depends_on:
+      - sbomai-parser
+      - sbomai-vulnscan
+      - sbomai-policy
+      - redis
+
+  sbomai-cli:
+    build:
+      context: ./sbomai-cli
+      dockerfile: Dockerfile
+    container_name: sbomai-cli
+    volumes:
+      - ./sample-sboms:/app/sboms:ro
+      - ./reports:/app/reports
+    environment:
+      - SBOMAI_CORE_URL=http://sbomai-core:8080
+    networks:
+      - sbomai-network
+    restart: unless-stopped
+    depends_on:
+      - sbomai-core
+
+  # AI/ML Models Microservice
+  sbomai-models:
+    build:
+      context: ./sbomai-models
+      dockerfile: Dockerfile
+    container_name: sbomai-models
+    ports:
+      - "50051:50051"
+      - "9091:9090"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+      - GRPC_PORT=50051
+      - ENABLE_METRICS=true
+      - LOG_LEVEL=INFO
+      - CACHE_ENABLED=true
+      - CACHE_TTL=3600
+    volumes:
+      - ./sbomai-models/data:/app/data
+      - ./sbomai-models/cache:/app/cache
+      - ./sbomai-models/models:/app/models
+    networks:
+      - sbomai-network
+    depends_on:
+      - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9090/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Monitoring Stack
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:v2.48.0
     container_name: sbomai-prometheus
     ports:
       - "9090:9090"
     volumes:
-      - ./sbomai-monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./infra/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./infra/monitoring/prometheus/rules:/etc/prometheus/rules
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -17,13 +139,12 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
-    restart: unless-stopped
     networks:
-      - sbomai-monitoring
+      - sbomai-network
+    restart: unless-stopped
 
-  # Grafana for visualization
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:10.2.0
     container_name: sbomai-grafana
     ports:
       - "3000:3000"
@@ -31,51 +152,136 @@ services:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=sbomai2024
       - GF_USERS_ALLOW_SIGN_UP=false
-      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+      - GF_AUTH_ANONYMOUS_ENABLED=false
+      - GF_SERVER_ROOT_URL=http://localhost:3000
+      - GF_SERVER_SERVE_FROM_SUB_PATH=false
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/var/lib/grafana/dashboards/sbomai-overview.json
+      - GF_FEATURE_TOGGLES_ENABLE=publicDashboards
+      - GF_UNIFIED_ALERTING_ENABLED=true
+      - GF_ALERTING_ENABLED=false
     volumes:
+      - ./infra/monitoring/grafana/provisioning:/etc/grafana/provisioning
+      - ./infra/monitoring/grafana/dashboards:/var/lib/grafana/dashboards
       - grafana_data:/var/lib/grafana
-      - ./sbomai-monitoring/grafana/provisioning:/etc/grafana/provisioning
-      - ./sbomai-monitoring/grafana/dashboards:/var/lib/grafana/dashboards
-    restart: unless-stopped
     networks:
-      - sbomai-monitoring
+      - sbomai-network
+    restart: unless-stopped
     depends_on:
       - prometheus
+      - loki
 
-  # Loki for centralized logging (optional)
   loki:
-    image: grafana/loki:latest
+    image: grafana/loki:2.9.0
     container_name: sbomai-loki
     ports:
       - "3100:3100"
-    command: -config.file=/etc/loki/local-config.yaml
     volumes:
-      - ./sbomai-monitoring/loki/loki-config.yml:/etc/loki/local-config.yaml
+      - ./infra/monitoring/loki/loki-config.yml:/etc/loki/local-config.yaml
       - loki_data:/loki
-    restart: unless-stopped
+    command: -config.file=/etc/loki/local-config.yaml
     networks:
-      - sbomai-monitoring
+      - sbomai-network
+    restart: unless-stopped
 
-  # Promtail for log collection (optional)
   promtail:
-    image: grafana/promtail:latest
+    image: grafana/promtail:2.9.0
     container_name: sbomai-promtail
     volumes:
-      - ./sbomai-monitoring/promtail/promtail-config.yml:/etc/promtail/config.yml
+      - ./infra/monitoring/promtail/promtail-config.yml:/etc/promtail/config.yml
       - /var/log:/var/log
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
     command: -config.file=/etc/promtail/config.yml
-    restart: unless-stopped
     networks:
-      - sbomai-monitoring
+      - sbomai-network
+    restart: unless-stopped
     depends_on:
       - loki
+
+  node-exporter:
+    image: prom/node-exporter:v1.6.1
+    container_name: sbomai-node-exporter
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    networks:
+      - sbomai-network
+    restart: unless-stopped
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.47.2
+    container_name: sbomai-cadvisor
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    privileged: true
+    networks:
+      - sbomai-network
+    restart: unless-stopped
+
+  alertmanager:
+    image: prom/alertmanager:v0.26.0
+    container_name: sbomai-alertmanager
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./infra/monitoring/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - alertmanager_data:/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--storage.path=/alertmanager'
+    networks:
+      - sbomai-network
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: sbomai-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - sbomai-network
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: sbomai-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./infra/monitoring/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./infra/monitoring/nginx/ssl:/etc/nginx/ssl
+    networks:
+      - sbomai-network
+    restart: unless-stopped
+    depends_on:
+      - grafana
+      - prometheus
+      - loki
+      - sbomai-core
 
 volumes:
   prometheus_data:
   grafana_data:
   loki_data:
+  alertmanager_data:
+  redis_data:
 
 networks:
-  sbomai-monitoring:
+  sbomai-network:
     driver: bridge 

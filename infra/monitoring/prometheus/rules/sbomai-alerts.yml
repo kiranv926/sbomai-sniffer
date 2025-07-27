@@ -1,0 +1,170 @@
+groups:
+  - name: sbomai-alerts
+    rules:
+      # High/Critical CVEs Alert
+      - alert: HighCriticalCVEsDetected
+        expr: sbomai_vulnerabilities_total{severity=~"high|critical"} > 10
+        for: 1m
+        labels:
+          severity: warning
+          team: security
+        annotations:
+          summary: "High number of High/Critical CVEs detected"
+          description: "{{ $value }} High/Critical CVEs found in SBOM scan"
+          runbook_url: "https://github.com/sbomai/runbooks/blob/main/high-cves.md"
+
+      # SBOM Parse Failure Alert
+      - alert: SbomParseFailure
+        expr: rate(sbomai_parser_errors_total[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: critical
+          team: platform
+        annotations:
+          summary: "SBOM parsing failures detected"
+          description: "SBOM parsing error rate is {{ $value }} errors per second"
+          runbook_url: "https://github.com/sbomai/runbooks/blob/main/parser-failures.md"
+
+      # AI Model Anomaly Alert
+      - alert: AiModelAnomaly
+        expr: sbomai_ai_prediction_confidence < 0.7
+        for: 5m
+        labels:
+          severity: warning
+          team: ai
+        annotations:
+          summary: "AI model confidence below threshold"
+          description: "AI prediction confidence is {{ $value }} (below 0.7 threshold)"
+          runbook_url: "https://github.com/sbomai/runbooks/blob/main/ai-anomalies.md"
+
+      # Service Down Alert
+      - alert: SbomaiServiceDown
+        expr: up{job=~"sbomai-.*"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: platform
+        annotations:
+          summary: "SBOMAI service is down"
+          description: "{{ $labels.job }} service is down for more than 1 minute"
+          runbook_url: "https://github.com/sbomai/runbooks/blob/main/service-down.md"
+
+      # High Memory Usage Alert
+      - alert: HighMemoryUsage
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes > 0.85
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+        annotations:
+          summary: "High memory usage detected"
+          description: "Memory usage is {{ $value | humanizePercentage }}"
+          runbook_url: "https://github.com/sbomai/runbooks/blob/main/high-memory.md"
+
+      # High CPU Usage Alert
+      - alert: HighCpuUsage
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage is {{ $value }}%"
+          runbook_url: "https://github.com/sbomai/runbooks/blob/main/high-cpu.md"
+
+      # Policy Violation Alert
+      - alert: PolicyViolationsDetected
+        expr: sbomai_policy_violations_total > 5
+        for: 2m
+        labels:
+          severity: warning
+          team: security
+        annotations:
+          summary: "Policy violations detected"
+          description: "{{ $value }} policy violations found"
+          runbook_url: "https://github.com/sbomai/runbooks/blob/main/policy-violations.md"
+
+      # Scan Queue Depth Alert
+      - alert: HighScanQueueDepth
+        expr: sbomai_scan_queue_depth > 100
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+        annotations:
+          summary: "High scan queue depth"
+          description: "Scan queue depth is {{ $value }} items"
+          runbook_url: "https://github.com/sbomai/runbooks/blob/main/queue-depth.md"
+
+      # Slow Scan Performance Alert
+      - alert: SlowScanPerformance
+        expr: histogram_quantile(0.95, rate(sbomai_scan_duration_seconds_bucket[5m])) > 300
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+        annotations:
+          summary: "Slow scan performance detected"
+          description: "95th percentile scan duration is {{ $value }} seconds"
+          runbook_url: "https://github.com/sbomai/runbooks/blob/main/slow-scans.md"
+
+      # Database Connection Alert
+      - alert: DatabaseConnectionIssues
+        expr: sbomai_database_connections_active / sbomai_database_connections_max > 0.8
+        for: 2m
+        labels:
+          severity: warning
+          team: platform
+        annotations:
+          summary: "High database connection usage"
+          description: "Database connection usage is {{ $value | humanizePercentage }}"
+          runbook_url: "https://github.com/sbomai/runbooks/blob/main/db-connections.md"
+
+      # API Error Rate Alert
+      - alert: HighApiErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: critical
+          team: platform
+        annotations:
+          summary: "High API error rate detected"
+          description: "API error rate is {{ $value | humanizePercentage }}"
+          runbook_url: "https://github.com/sbomai/runbooks/blob/main/api-errors.md"
+
+      # Disk Space Alert
+      - alert: LowDiskSpace
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) < 0.1
+        for: 5m
+        labels:
+          severity: critical
+          team: platform
+        annotations:
+          summary: "Low disk space"
+          description: "Disk space usage is {{ $value | humanizePercentage }}"
+          runbook_url: "https://github.com/sbomai/runbooks/blob/main/disk-space.md"
+
+      # JVM Memory Alert
+      - alert: HighJvmMemoryUsage
+        expr: (jvm_memory_used_bytes{area="heap"} / jvm_memory_max_bytes{area="heap"}) > 0.85
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+        annotations:
+          summary: "High JVM memory usage"
+          description: "JVM heap usage is {{ $value | humanizePercentage }}"
+          runbook_url: "https://github.com/sbomai/runbooks/blob/main/jvm-memory.md"
+
+      # Log Error Rate Alert
+      - alert: HighLogErrorRate
+        expr: rate(logback_events_total{level="ERROR"}[5m]) > 10
+        for: 2m
+        labels:
+          severity: warning
+          team: platform
+        annotations:
+          summary: "High error log rate"
+          description: "Error log rate is {{ $value }} errors per second"
+          runbook_url: "https://github.com/sbomai/runbooks/blob/main/log-errors.md" 

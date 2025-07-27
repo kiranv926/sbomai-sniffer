@@ -1,0 +1,343 @@
+syntax = "proto3";
+
+package sbomai.ai;
+
+// SBOMAI AI Analysis Service
+service SbomaiAiService {
+  // Explain why a specific component version is risky
+  rpc ExplainRisk(ExplainRiskRequest) returns (ExplainRiskResponse);
+  
+  // Predict risk score for a component
+  rpc PredictRiskScore(PredictRiskScoreRequest) returns (PredictRiskScoreResponse);
+  
+  // Suggest fixes for vulnerabilities
+  rpc SuggestFix(SuggestFixRequest) returns (SuggestFixResponse);
+  
+  // Generate explainable analysis chain for entire SBOM
+  rpc ExplainableSbomChain(ExplainableSbomChainRequest) returns (ExplainableSbomChainResponse);
+  
+  // Predictive vulnerability detection using Graph Neural Networks
+  rpc PredictVulnerabilityPatterns(PredictVulnerabilityPatternsRequest) returns (PredictVulnerabilityPatternsResponse);
+  
+  // Get service health and capabilities
+  rpc GetServiceInfo(ServiceInfoRequest) returns (ServiceInfoResponse);
+}
+
+// Request to explain risk for a specific component
+message ExplainRiskRequest {
+  SbomComponent component = 1;
+  repeated Vulnerability vulnerabilities = 2;
+  string analysis_context = 3;  // Additional context for analysis
+  AiModelConfig model_config = 4;
+}
+
+// Response with risk explanation
+message ExplainRiskResponse {
+  string explanation = 1;
+  double confidence_score = 2;
+  repeated string sources = 3;  // URLs or references
+  repeated string key_factors = 4;  // Key factors contributing to risk
+  RiskLevel risk_level = 5;
+  string model_used = 6;
+  int64 processing_time_ms = 7;
+}
+
+// Request to predict risk score
+message PredictRiskScoreRequest {
+  SbomComponent component = 1;
+  repeated Vulnerability historical_vulnerabilities = 2;
+  repeated string features = 3;  // Additional features for prediction
+  MlModelConfig ml_config = 4;
+}
+
+// Response with predicted risk score
+message PredictRiskScoreResponse {
+  double risk_score = 1;  // 0-100 scale
+  double confidence_interval_lower = 2;
+  double confidence_interval_upper = 3;
+  repeated FeatureImportance feature_importance = 4;
+  string model_used = 5;
+  string explanation = 6;
+  int64 processing_time_ms = 7;
+}
+
+// Request to suggest fixes
+message SuggestFixRequest {
+  string vulnerability_id = 1;
+  SbomComponent component = 2;
+  repeated string constraints = 3;  // Version constraints, license requirements, etc.
+  FixStrategy strategy = 4;
+}
+
+// Response with fix suggestions
+message SuggestFixResponse {
+  repeated FixSuggestion suggestions = 1;
+  string reasoning = 2;
+  double confidence_score = 3;
+  repeated string policy_rules = 4;  // Generated policy rules
+  int64 processing_time_ms = 5;
+}
+
+// Request for explainable SBOM chain analysis
+message ExplainableSbomChainRequest {
+  SbomDocument sbom_document = 1;
+  repeated AnalysisStep steps = 2;  // Custom analysis steps
+  ChainConfig chain_config = 3;
+}
+
+// Response with explainable chain analysis
+message ExplainableSbomChainResponse {
+  repeated ChainStep chain_steps = 1;
+  string overall_assessment = 2;
+  double overall_risk_score = 3;
+  repeated string recommendations = 4;
+  repeated string critical_findings = 5;
+  int64 processing_time_ms = 6;
+}
+
+// Request for predictive vulnerability pattern detection
+message PredictVulnerabilityPatternsRequest {
+  SbomDocument sbom_document = 1;
+  GnnConfig gnn_config = 2;
+  repeated string analysis_types = 3;  // "dependency_patterns", "emerging_vulnerabilities", "critical_paths"
+}
+
+// Response with predictive vulnerability pattern analysis
+message PredictVulnerabilityPatternsResponse {
+  double vulnerability_likelihood = 1;
+  GraphFeatures graph_features = 2;
+  repeated DependencyPattern dependency_patterns = 3;
+  repeated HighRiskComponent high_risk_components = 4;
+  repeated EmergingVulnerability emerging_vulnerabilities = 5;
+  VulnerabilityPropagation vulnerability_propagation = 6;
+  repeated CriticalDependency critical_dependencies = 7;
+  DependencyHealth dependency_health = 8;
+  double confidence_score = 9;
+  int64 processing_time_ms = 10;
+}
+
+// Service info request
+message ServiceInfoRequest {}
+
+// Service info response
+message ServiceInfoResponse {
+  string service_name = 1;
+  string version = 2;
+  repeated string available_models = 3;
+  repeated string capabilities = 4;
+  bool is_healthy = 5;
+  string uptime = 6;
+}
+
+// SBOM Component
+message SbomComponent {
+  string name = 1;
+  string version = 2;
+  string group_id = 3;
+  string description = 4;
+  repeated string licenses = 5;
+  string purl = 6;  // Package URL
+  repeated string tags = 7;
+  map<string, string> metadata = 8;
+}
+
+// Vulnerability information
+message Vulnerability {
+  string id = 1;
+  string description = 2;
+  Severity severity = 3;
+  double cvss_score = 4;
+  repeated string affected_versions = 5;
+  repeated string fixed_versions = 6;
+  string source = 7;  // NVD, OSS Index, etc.
+  string published_date = 8;
+  repeated string references = 9;
+}
+
+// SBOM Document
+message SbomDocument {
+  string name = 1;
+  string version = 2;
+  SbomFormat format = 3;
+  string created_date = 4;
+  repeated SbomComponent components = 5;
+  map<string, string> metadata = 6;
+}
+
+// Feature importance for ML models
+message FeatureImportance {
+  string feature_name = 1;
+  double importance_score = 2;
+  string description = 3;
+}
+
+// Fix suggestion
+message FixSuggestion {
+  string action = 1;  // "upgrade", "downgrade", "replace", "remove"
+  SbomComponent suggested_component = 2;
+  string reasoning = 3;
+  double confidence = 4;
+  repeated string risks = 5;
+  repeated string benefits = 6;
+}
+
+// Analysis step in chain
+message AnalysisStep {
+  string step_name = 1;
+  string description = 2;
+  map<string, string> parameters = 3;
+}
+
+// Chain step result
+message ChainStep {
+  string step_name = 1;
+  string result = 2;
+  double confidence = 3;
+  repeated string findings = 4;
+  int64 duration_ms = 5;
+}
+
+// AI Model Configuration
+message AiModelConfig {
+  string model_name = 1;  // "gpt-4", "claude-3", "gemini-pro", "local-bert"
+  double temperature = 2;
+  int32 max_tokens = 3;
+  string provider = 4;  // "openai", "anthropic", "google", "local"
+}
+
+// ML Model Configuration
+message MlModelConfig {
+  string model_type = 1;  // "xgboost", "lightgbm", "logistic_regression"
+  map<string, string> hyperparameters = 2;
+  bool use_feature_importance = 3;
+  bool use_confidence_intervals = 4;
+}
+
+// Fix Strategy
+message FixStrategy {
+  string approach = 1;  // "conservative", "aggressive", "balanced"
+  bool consider_breaking_changes = 2;
+  bool prefer_latest_versions = 3;
+  repeated string priority_criteria = 4;
+}
+
+// Chain Configuration
+message ChainConfig {
+  int32 max_steps = 1;
+  double confidence_threshold = 2;
+  bool include_detailed_explanations = 3;
+  repeated string analysis_types = 4;  // "vulnerability", "license", "outdated", "custom"
+}
+
+// Enums
+enum RiskLevel {
+  UNKNOWN = 0;
+  LOW = 1;
+  MEDIUM = 2;
+  HIGH = 3;
+  CRITICAL = 4;
+}
+
+enum Severity {
+  UNKNOWN_SEVERITY = 0;
+  NONE = 1;
+  LOW_SEVERITY = 2;
+  MEDIUM_SEVERITY = 3;
+  HIGH_SEVERITY = 4;
+  CRITICAL_SEVERITY = 5;
+}
+
+enum SbomFormat {
+  UNKNOWN_FORMAT = 0;
+  SPDX = 1;
+  CYCLONEDX = 2;
+  SWID = 3;
+  CUSTOM = 4;
+}
+
+// GNN Configuration
+message GnnConfig {
+  string gnn_type = 1;  // "gcn", "gat", "graphconv"
+  int32 hidden_dim = 2;
+  int32 num_layers = 3;
+  double dropout = 4;
+  bool use_node_features = 5;
+  bool use_edge_features = 6;
+}
+
+// Graph Features
+message GraphFeatures {
+  int32 num_nodes = 1;
+  int32 num_edges = 2;
+  double density = 3;
+  double avg_clustering = 4;
+  double avg_degree_centrality = 5;
+  double avg_betweenness_centrality = 6;
+  double avg_closeness_centrality = 7;
+  double vulnerability_ratio = 8;
+  int32 max_dependency_depth = 9;
+  double avg_dependency_depth = 10;
+  int32 critical_path_length = 11;
+}
+
+// Dependency Pattern
+message DependencyPattern {
+  string pattern_type = 1;  // "long_chain", "vulnerable_cluster", "critical_path"
+  repeated string components = 2;
+  double risk_score = 3;
+  string description = 4;
+  repeated string vulnerability_types = 5;
+}
+
+// High Risk Component
+message HighRiskComponent {
+  string component_id = 1;
+  string component_name = 2;
+  double risk_score = 3;
+  repeated Vulnerability vulnerabilities = 4;
+  repeated string dependencies = 5;
+  repeated string dependents = 6;
+  string reasoning = 7;
+}
+
+// Emerging Vulnerability
+message EmergingVulnerability {
+  string component_id = 1;
+  string component_name = 2;
+  double emerging_risk_score = 3;
+  repeated string risk_factors = 4;
+  repeated string predicted_vulnerability_types = 5;
+  string explanation = 6;
+}
+
+// Vulnerability Propagation
+message VulnerabilityPropagation {
+  double propagation_risk = 1;
+  repeated string affected_components = 2;
+  repeated string vulnerable_components = 3;
+  int32 total_components = 4;
+  string analysis = 5;
+}
+
+// Critical Dependency
+message CriticalDependency {
+  string component_id = 1;
+  string component_name = 2;
+  double betweenness_centrality = 3;
+  int32 in_degree = 4;
+  int32 out_degree = 5;
+  bool has_vulnerabilities = 6;
+  double critical_score = 7;
+  string impact_analysis = 8;
+}
+
+// Dependency Health
+message DependencyHealth {
+  double density = 1;
+  double clustering_coefficient = 2;
+  double vulnerability_ratio = 3;
+  int32 max_depth = 4;
+  double avg_depth = 5;
+  double overall_health_score = 6;
+  repeated string health_indicators = 7;
+} 

@@ -1,0 +1,67 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "Sample Project SBOM",
+  "spdxVersion": "SPDX-2.3",
+  "creationInfo": {
+    "created": "2024-01-15T10:00:00Z",
+    "creators": ["Tool: SBOMAI-Generator-1.0"],
+    "licenseListVersion": "3.20"
+  },
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://sbomai.example.com/spdx/sample-project-1.0.0",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-1",
+      "name": "log4j-core",
+      "versionInfo": "2.17.1",
+      "packageFileName": "log4j-core-2.17.1.jar",
+      "supplier": "Apache Software Foundation",
+      "downloadLocation": "https://maven.apache.org/repository/org/apache/logging/log4j/log4j-core/2.17.1/log4j-core-2.17.1.jar",
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "copyrightText": "Copyright 1999-2022 The Apache Software Foundation"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-2",
+      "name": "spring-boot-starter-web",
+      "versionInfo": "3.1.0",
+      "packageFileName": "spring-boot-starter-web-3.1.0.jar",
+      "supplier": "Pivotal Software, Inc.",
+      "downloadLocation": "https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-starter-web/3.1.0/spring-boot-starter-web-3.1.0.jar",
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "copyrightText": "Copyright 2012-2023 Pivotal Software, Inc."
+    },
+    {
+      "SPDXID": "SPDXRef-Package-3",
+      "name": "jackson-databind",
+      "versionInfo": "2.15.2",
+      "packageFileName": "jackson-databind-2.15.2.jar",
+      "supplier": "FasterXML",
+      "downloadLocation": "https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.15.2/jackson-databind-2.15.2.jar",
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "copyrightText": "Copyright 2008-2023 FasterXML"
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relatedSpdxElement": "SPDXRef-Package-1",
+      "relationshipType": "DESCRIBES"
+    },
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relatedSpdxElement": "SPDXRef-Package-2",
+      "relationshipType": "DESCRIBES"
+    },
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relatedSpdxElement": "SPDXRef-Package-3",
+      "relationshipType": "DESCRIBES"
+    }
+  ]
+} 

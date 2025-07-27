@@ -1,0 +1,168 @@
+{
+  "vulnerability_likelihood": 0.75,
+  "confidence_score": 0.82,
+  "graph_features": {
+    "num_nodes": 8,
+    "num_edges": 12,
+    "density": 0.214,
+    "avg_clustering": 0.45,
+    "avg_degree_centrality": 0.375,
+    "avg_betweenness_centrality": 0.125,
+    "avg_closeness_centrality": 0.5,
+    "vulnerability_ratio": 0.5,
+    "max_dependency_depth": 4,
+    "avg_dependency_depth": 2.25,
+    "critical_path_length": 4
+  },
+  "pattern_analysis": {
+    "long_dependency_chains": [
+      [
+        "spring-boot",
+        "spring-web",
+        "tomcat-embed",
+        "tomcat-core"
+      ],
+      [
+        "spring-boot",
+        "spring-core",
+        "jackson-databind",
+        "jackson-core"
+      ]
+    ],
+    "vulnerable_clusters": [
+      [
+        "spring-boot",
+        "spring-core",
+        "spring-web"
+      ],
+      [
+        "jackson-databind",
+        "jackson-core",
+        "jackson-annotations"
+      ]
+    ],
+    "critical_paths": [
+      [
+        "spring-boot",
+        "spring-web",
+        "tomcat-embed",
+        "tomcat-core"
+      ]
+    ]
+  },
+  "high_risk_components": [
+    {
+      "component_id": "jackson-databind",
+      "component_name": "jackson-databind",
+      "risk_score": 0.91,
+      "vulnerabilities": [
+        {
+          "id": "CVE-2023-9012",
+          "cvss_score": 9.1
+        }
+      ],
+      "dependencies": [
+        "jackson-core",
+        "jackson-annotations"
+      ],
+      "dependents": [
+        "spring-core"
+      ]
+    },
+    {
+      "component_id": "spring-boot",
+      "component_name": "spring-boot",
+      "risk_score": 0.85,
+      "vulnerabilities": [
+        {
+          "id": "CVE-2023-1234",
+          "cvss_score": 8.5
+        }
+      ],
+      "dependencies": [
+        "spring-core",
+        "spring-web"
+      ],
+      "dependents": []
+    }
+  ],
+  "emerging_vulnerabilities": [
+    {
+      "component_id": "spring-web",
+      "component_name": "spring-web",
+      "emerging_risk_score": 0.65,
+      "risk_factors": [
+        "high_dependency_count",
+        "vulnerable_neighbors"
+      ],
+      "predicted_vulnerability_types": [
+        "propagation_vulnerability",
+        "cluster_attack"
+      ]
+    },
+    {
+      "component_id": "jackson-core",
+      "component_name": "jackson-core",
+      "emerging_risk_score": 0.55,
+      "risk_factors": [
+        "deep_dependency",
+        "vulnerable_neighbors"
+      ],
+      "predicted_vulnerability_types": [
+        "transitive_vulnerability",
+        "inherited_risk"
+      ]
+    }
+  ],
+  "vulnerability_propagation": {
+    "propagation_risk": 0.75,
+    "affected_components": [
+      "spring-boot",
+      "spring-web",
+      "spring-core"
+    ],
+    "vulnerable_components": [
+      "spring-boot",
+      "spring-core",
+      "jackson-databind",
+      "tomcat-embed"
+    ],
+    "total_components": 8,
+    "analysis": "High propagation risk due to interconnected vulnerable components"
+  },
+  "critical_dependencies": [
+    {
+      "component_id": "spring-core",
+      "component_name": "spring-core",
+      "betweenness_centrality": 0.4,
+      "in_degree": 2,
+      "out_degree": 1,
+      "has_vulnerabilities": true,
+      "critical_score": 0.85,
+      "impact_analysis": "Critical dependency with high centrality and vulnerabilities"
+    },
+    {
+      "component_id": "jackson-databind",
+      "component_name": "jackson-databind",
+      "betweenness_centrality": 0.3,
+      "in_degree": 1,
+      "out_degree": 2,
+      "has_vulnerabilities": true,
+      "critical_score": 0.78,
+      "impact_analysis": "Critical dependency with high CVSS score"
+    }
+  ],
+  "dependency_health": {
+    "density": 0.214,
+    "clustering_coefficient": 0.45,
+    "vulnerability_ratio": 0.5,
+    "max_depth": 4,
+    "avg_depth": 2.25,
+    "overall_health_score": 65.0,
+    "health_indicators": [
+      "high_vulnerability_ratio",
+      "deep_dependencies",
+      "vulnerable_clusters"
+    ]
+  }
+}

@@ -1,0 +1,121 @@
+# SBOMAI Web Scanner Application Configuration
+spring:
+  application:
+    name: sbomai-webscan
+  
+  # Database Configuration
+  datasource:
+    url: jdbc:h2:mem:sbomai-webscan
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+  
+  # H2 Console (for development)
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# Server Configuration
+server:
+  port: 8084
+  servlet:
+    context-path: /
+
+# Logging Configuration
+logging:
+  level:
+    com.sbomai.webscan: INFO
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+# SBOMAI Web Scanner Specific Configuration
+sbomai:
+  webscan:
+    # Scanner Configuration
+    scanner:
+      default-timeout: 30000 # 30 seconds
+      max-concurrent-scans: 10
+      user-agent: "SBOMAI-WebScanner/1.0"
+      follow-redirects: true
+      max-redirects: 5
+      verify-ssl: true
+    
+    # JavaScript Library Detection
+    javascript:
+      enabled: true
+      check-versions: true
+      vulnerability-check: true
+      update-check: true
+    
+    # Security Headers Analysis
+    headers:
+      enabled: true
+      critical-headers:
+        - "Strict-Transport-Security"
+        - "Content-Security-Policy"
+        - "X-Frame-Options"
+        - "X-Content-Type-Options"
+        - "X-XSS-Protection"
+        - "Referrer-Policy"
+    
+    # Metadata Detection
+    metadata:
+      enabled: true
+      scan-meta-tags: true
+      scan-comments: true
+      scan-javascript: true
+      scan-headers: true
+      sensitive-patterns:
+        - "api_key"
+        - "secret"
+        - "password"
+        - "token"
+        - "private_key"
+    
+    # Vulnerability Scanning
+    vulnerabilities:
+      enabled: true
+      scan-common-vulnerabilities: true
+      scan-ssl-tls: true
+      scan-cors: true
+      scan-csrf: true
+
+# Management Endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,capabilities
+  endpoint:
+    health:
+      show-details: when-authorized
+    prometheus:
+      enabled: true
+  info:
+    env:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: sbomai-webscan
+      module: webscan
+
+# Actuator Configuration
+management.endpoints.web.base-path: /actuator
+management.endpoint.health.show-details: always 
