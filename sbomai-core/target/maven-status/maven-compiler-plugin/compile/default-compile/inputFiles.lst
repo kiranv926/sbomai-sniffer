@@ -1,5 +1,6 @@
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\ports\PolicyConfiguration.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\domain\PolicyType.java
+C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\adapters\LocalAiAnalyzer.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\controllers\SbomAnalysisController.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\ports\ScannerInfo.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\domain\AnalysisStatus.java
@@ -13,6 +14,7 @@ C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbom
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\services\AnalysisResult.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\domain\Severity.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\domain\VulnerabilitySource.java
+C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\config\AiAnalyzerConfig.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\domain\PolicyViolation.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\domain\SbomDocument.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\ports\SbomParser.java
@@ -23,6 +25,7 @@ C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbom
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\domain\RiskLevel.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\domain\Vulnerability.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\ports\PolicyEnforcementException.java
+C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\adapters\GrpcAiAnalyzer.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\services\SbomAnalysisOrchestrator.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\domain\AiAnalysisResult.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\ports\AiAnalysisException.java
@@ -32,4 +35,5 @@ C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbom
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\services\HealthStatus.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\services\MetricsService.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\config\MetricsConfig.java
+C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\adapters\OpenAiAnalyzer.java
 C:\Users\kiran\Development\git\sbomai-sniffer\sbomai-core\src\main\java\com\sbomai\core\SbomaiCoreApplication.java

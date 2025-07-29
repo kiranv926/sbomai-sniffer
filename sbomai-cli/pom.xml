@@ -25,6 +25,7 @@
         <dependency>
             <groupId>com.sbomai</groupId>
             <artifactId>sbomai-core</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- Spring Boot Starters -->
@@ -45,6 +46,7 @@
         <dependency>
             <groupId>info.picocli</groupId>
             <artifactId>picocli-spring-boot-starter</artifactId>
+            <version>${picocli.version}</version>
         </dependency>
 
         <!-- HTTP Client for remote API calls -->

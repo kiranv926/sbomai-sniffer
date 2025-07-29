@@ -1,11 +1,14 @@
 package com.sbomai.cli;
 
 import com.sbomai.cli.commands.AnalyzeCommand;
+import com.sbomai.cli.commands.BatchCommand;
+import com.sbomai.cli.commands.ConfigCommand;
 import com.sbomai.cli.commands.HealthCommand;
 import com.sbomai.cli.commands.VersionCommand;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import picocli.CommandLine;
 
@@ -23,12 +26,16 @@ public class SbomaiCliApplication {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(CommandLine.IFactory factory) {
+    public CommandLineRunner commandLineRunner(ApplicationContext context) {
         return args -> {
-            CommandLine commandLine = new CommandLine(new SbomaiCliCommand(), factory);
-            commandLine.addSubcommand("analyze", new AnalyzeCommand());
-            commandLine.addSubcommand("health", new HealthCommand());
-            commandLine.addSubcommand("version", new VersionCommand());
+            CommandLine commandLine = new CommandLine(new SbomaiCliCommand());
+            
+            // Get command beans from Spring context to ensure dependency injection
+            commandLine.addSubcommand("analyze", context.getBean(AnalyzeCommand.class));
+            commandLine.addSubcommand("batch", context.getBean(BatchCommand.class));
+            commandLine.addSubcommand("config", context.getBean(ConfigCommand.class));
+            commandLine.addSubcommand("health", context.getBean(HealthCommand.class));
+            commandLine.addSubcommand("version", context.getBean(VersionCommand.class));
             
             int exitCode = commandLine.execute(args);
             System.exit(exitCode);

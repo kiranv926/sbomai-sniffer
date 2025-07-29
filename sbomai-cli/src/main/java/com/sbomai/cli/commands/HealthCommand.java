@@ -1,6 +1,6 @@
 package com.sbomai.cli.commands;
 
-import com.sbomai.cli.services.CliHealthService;
+import com.sbomai.core.services.SbomAnalysisOrchestrator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine;
@@ -19,7 +19,7 @@ import java.util.concurrent.Callable;
 public class HealthCommand implements Callable<Integer> {
 
     @Autowired
-    private CliHealthService healthService;
+    private SbomAnalysisOrchestrator orchestrator;
 
     @CommandLine.Option(
         names = {"-r", "--remote"},
@@ -42,24 +42,30 @@ public class HealthCommand implements Callable<Integer> {
 
             if (checkRemote) {
                 System.out.println("🌐 Checking remote service at: " + remoteUrl);
-                boolean isHealthy = healthService.checkRemoteHealth(remoteUrl);
-                
-                if (isHealthy) {
-                    System.out.println("✅ Remote service is healthy");
-                    return 0;
-                } else {
-                    System.out.println("❌ Remote service is unhealthy");
-                    return 1;
-                }
+                System.out.println("⚠️  Remote health check not implemented yet");
+                return 1;
             } else {
                 System.out.println("🏠 Checking local service...");
-                boolean isHealthy = healthService.checkLocalHealth();
                 
-                if (isHealthy) {
-                    System.out.println("✅ Local service is healthy");
-                    return 0;
+                if (orchestrator != null) {
+                    var healthStatus = orchestrator.getHealthStatus();
+                    
+                    System.out.println("📊 Service Status:");
+                    System.out.println("  SBOM Parser: " + (healthStatus.isSbomParserAvailable() ? "✅ Available" : "❌ Unavailable"));
+                    System.out.println("  Vulnerability Scanner: " + (healthStatus.isVulnerabilityScannerAvailable() ? "✅ Available" : "❌ Unavailable"));
+                    System.out.println("  AI Analyzer: " + (healthStatus.isAiAnalyzerAvailable() ? "✅ Available" : "❌ Unavailable"));
+                    System.out.println("  Policy Enforcer: " + (healthStatus.isPolicyEnforcerAvailable() ? "✅ Available" : "❌ Unavailable"));
+                    
+                    boolean overallHealthy = healthStatus.isFullyOperational();
+                    if (overallHealthy) {
+                        System.out.println("\n✅ All services are healthy and operational!");
+                        return 0;
+                    } else {
+                        System.out.println("\n⚠️  Some services are unavailable");
+                        return 1;
+                    }
                 } else {
-                    System.out.println("❌ Local service is unhealthy");
+                    System.out.println("❌ Orchestrator service not available");
                     return 1;
                 }
             }

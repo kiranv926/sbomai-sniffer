@@ -11,41 +11,40 @@
     <packaging>pom</packaging>
 
     <name>SBOMAI - AI-Powered SBOM Analysis Tool</name>
-    <description>
-        A modular, AI-powered Software Bill of Materials (SBOM) analysis tool
-        with vulnerability scanning, policy enforcement, and predictive risk analysis.
-    </description>
-
-    <url>https://github.com/kiranv926/sbomai-sniffer</url>
+    <description>Modular Java project for AI-powered Software Bill of Materials analysis</description>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.boot.version>3.2.0</spring.boot.version>
-        <spring.version>6.1.0</spring.version>
+        <spring.cloud.version>2023.0.0</spring.cloud.version>
         <jackson.version>2.15.2</jackson.version>
         <junit.version>5.10.0</junit.version>
         <mockito.version>5.7.0</mockito.version>
-        <slf4j.version>2.0.9</slf4j.version>
         <logback.version>1.4.11</logback.version>
-        <openai.version>0.18.2</openai.version>
-        <spdx.version>2.2.5</spdx.version>
-        <cyclonedx.version>1.0.0</cyclonedx.version>
-        <nvd.version>1.0.0</nvd.version>
+        <slf4j.version>2.0.9</slf4j.version>
         <picocli.version>4.7.5</picocli.version>
-        <micrometer.version>1.12.0</micrometer.version>
+        <openai.version>0.12.0</openai.version>
+        <nvd.version>1.0.0</nvd.version>
+        <spdx.version>2.3.0</spdx.version>
+        <cyclonedx.version>1.5.0</cyclonedx.version>
     </properties>
 
     <modules>
+        <module>sbomai-core</module>
         <module>sbomai-parser</module>
         <module>sbomai-vulnscan</module>
         <module>sbomai-policy</module>
-        <module>sbomai-core</module>
         <module>sbomai-cli</module>
-        <module>sbomai-github</module>
-        <module>sbomai-livefeed</module>
     </modules>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -58,15 +57,19 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Jackson for JSON processing -->
+            <!-- Spring Cloud BOM -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Jackson -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
 
@@ -83,43 +86,6 @@
                 <version>${mockito.version}</version>
                 <scope>test</scope>
             </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-junit-jupiter</artifactId>
-                <version>${mockito.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- Logging -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${logback.version}</version>
-            </dependency>
-
-            <!-- OpenAI -->
-            <dependency>
-                <groupId>com.theokanning.openai-gpt3-java</groupId>
-                <artifactId>service</artifactId>
-                <version>${openai.version}</version>
-            </dependency>
-
-            <!-- SBOM Parsing - Using Jackson for JSON/XML/YAML -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.dataformat</groupId>
-                <artifactId>jackson-dataformat-xml</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.dataformat</groupId>
-                <artifactId>jackson-dataformat-yaml</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
 
             <!-- CLI -->
             <dependency>
@@ -127,29 +93,24 @@
                 <artifactId>picocli</artifactId>
                 <version>${picocli.version}</version>
             </dependency>
+
+            <!-- AI/OpenAI -->
             <dependency>
-                <groupId>info.picocli</groupId>
-                <artifactId>picocli-spring-boot-starter</artifactId>
-                <version>${picocli.version}</version>
+                <groupId>com.github.TheoKanning</groupId>
+                <artifactId>openai-java</artifactId>
+                <version>${openai.version}</version>
             </dependency>
 
-            <!-- Internal module dependencies -->
+            <!-- SBOM Formats -->
             <dependency>
-                <groupId>com.sbomai</groupId>
-                <artifactId>sbomai-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <!-- Micrometer for metrics -->
-            <dependency>
-                <groupId>io.micrometer</groupId>
-                <artifactId>micrometer-registry-prometheus</artifactId>
-                <version>${micrometer.version}</version>
+                <groupId>org.spdx</groupId>
+                <artifactId>spdx-java-library</artifactId>
+                <version>${spdx.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.micrometer</groupId>
-                <artifactId>micrometer-core</artifactId>
-                <version>${micrometer.version}</version>
+                <groupId>org.cyclonedx</groupId>
+                <artifactId>cyclonedx-core-java</artifactId>
+                <version>${cyclonedx.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -176,59 +137,19 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.1.2</version>
                 </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.1.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>3.3.0</version>
-                    <executions>
-                        <execution>
-                            <id>attach-sources</id>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.5.0</version>
-                    <executions>
-                        <execution>
-                            <id>attach-javadocs</id>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
             </plugins>
         </pluginManagement>
     </build>
 
     <profiles>
         <profile>
-            <id>release</id>
+            <id>docker</id>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
+                        <groupId>com.spotify</groupId>
+                        <artifactId>dockerfile-maven-plugin</artifactId>
+                        <version>1.4.13</version>
                     </plugin>
                 </plugins>
             </build>
