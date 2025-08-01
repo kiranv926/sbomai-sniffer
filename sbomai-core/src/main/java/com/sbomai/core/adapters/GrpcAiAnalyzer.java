@@ -30,13 +30,13 @@ public class GrpcAiAnalyzer implements AiAnalyzer {
     
     private static final Logger logger = LoggerFactory.getLogger(GrpcAiAnalyzer.class);
     
-    @Value("${sbomai.ai.grpc.host:localhost}")
+    @Value("${sbomai.engine.grpc.host:engine}")
     private String grpcHost;
     
-    @Value("${sbomai.ai.grpc.port:50051}")
+    @Value("${sbomai.engine.grpc.port:50051}")
     private int grpcPort;
     
-    @Value("${sbomai.ai.grpc.timeout:30}")
+    @Value("${sbomai.engine.grpc.timeout:30}")
     private int timeoutSeconds;
     
     private final Executor executor;
@@ -87,7 +87,7 @@ public class GrpcAiAnalyzer implements AiAnalyzer {
     @Override
     public AnalyzerInfo getAnalyzerInfo() {
                         return new AnalyzerInfo(
-                    "AI/ML Models Microservice",
+                    "SBOMAI Engine",
                     "1.0.0",
                     new String[]{"explain_risk", "predict_risk", "suggest_fix", "explainable_chain"},
                     isAvailable,

@@ -1,213 +1,166 @@
 # SBOMAI - AI-Powered SBOM Analysis Tool
 
-SBOMAI is a modular Java project for AI-powered Software Bill of Materials (SBOM) analysis, providing comprehensive vulnerability scanning, policy enforcement, and predictive risk analysis.
+SBOMAI is a comprehensive, AI-powered Software Bill of Materials (SBOM) analysis tool that combines advanced machine learning, graph neural networks, and large language models to provide intelligent vulnerability detection, risk assessment, and policy enforcement.
+
+## 🌟 Features
+
+### 🤖 AI-Powered Analysis
+- **Risk Explanation**: Explain why specific component versions are risky using AI models
+- **Risk Prediction**: Predict risk scores for components using ML models
+- **Fix Suggestions**: Generate intelligent remediation suggestions
+- **Explainable Chains**: Create explainable analysis chains for entire SBOMs
+- **Predictive Vulnerability Detection**: Advanced Graph Neural Network analysis for predicting vulnerabilities before they're disclosed
+
+### 📊 SBOM Processing
+- **Multiple Formats**: Support for SPDX, CycloneDX, and SWID
+- **Vulnerability Scanning**: Integration with NVD, OSS Index, OSV, and more
+- **Policy Enforcement**: Customizable rules and compliance checks
+- **Dependency Analysis**: Deep analysis of dependency relationships and risks
+
+### 🔌 Integrations
+- **GitHub/GitLab**: Automated scanning and reporting
+- **Jira**: Issue tracking and workflow integration
+- **Dependency-Check**: Enhanced vulnerability scanning
+- **CI/CD**: GitHub Actions, Jenkins, Azure DevOps
+
+### 📈 Monitoring & Observability
+- **Grafana Dashboards**: Real-time metrics and visualization
+- **Prometheus**: Time-series metrics collection
+- **Loki**: Centralized log aggregation
+- **Health Checks**: Comprehensive service monitoring
+
+## 🏗️ Architecture
+
+SBOMAI follows a modular microservices architecture:
+
+```mermaid
+graph TD
+    CLI[SBOMAI CLI] --> Gateway[API Gateway]
+    Gateway --> Core[Core Service]
+    Gateway --> Storage[Storage Service]
+    Gateway --> AI[AI Engine]
+    Gateway --> Int[Integrations]
+    Core --> AI
+    Core --> Storage
+    Core --> Int
+    AI --> Models[(AI/ML Models)]
+    Storage --> DB[(PostgreSQL)]
+    Storage --> S3[(MinIO/S3)]
+    Int --> GitHub
+    Int --> GitLab
+    Int --> Jira
+```
+
+### Modules
+- **sbomai-common**: Common model definitions and utilities
+- **sbomai-core**: Core SBOM analysis logic
+- **sbomai-parser**: SBOM format parsing
+- **sbomai-vulnscan**: Vulnerability scanning
+- **sbomai-policy**: Policy enforcement
+- **sbomai-cli**: Command-line interface
+- **sbomai-api-gateway**: GraphQL/REST API gateway
+- **sbomai-storage**: Persistent storage management
+- **sbomai-integrations**: External service integrations
+- **sbomai-engine**: Python-based AI/ML microservice
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Java 21
+- Java 21+
+- Python 3.11+
 - Docker & Docker Compose
-- Maven 3.8+
+- Maven
+- PowerShell (Windows) or Bash (Linux/macOS)
 
-### Start the Complete Stack
+### Installation
 
-```bash
-# Using PowerShell script (Windows)
-.\start-sbomai.ps1
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd sbomai
+   ```
 
-# Or manually
-docker-compose up -d
-```
+2. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
 
-### Access Services
-- **Grafana Dashboard**: http://localhost:3000 (admin/sbomai2024)
-- **Prometheus**: http://localhost:9090
-- **Core API**: http://localhost:8080
-- **Parser API**: http://localhost:8081
-- **VulnScan API**: http://localhost:8082
-- **Policy API**: http://localhost:8083
+3. **Start the services**
+   ```powershell
+   # Windows
+   .\start-sbomai.ps1
 
-## 📋 Testing & Analysis
+   # Linux/macOS
+   ./start-sbomai.sh
+   ```
 
-### Test the System
+4. **Run a test scan**
+   ```bash
+   sbomai-cli analyze path/to/sbom.json
+   ```
 
-```bash
-# Run comprehensive tests
-.\test-sbomai.ps1 -All
-
-# Or test individual components
-.\test-sbomai.ps1 -StartServices
-.\test-sbomai.ps1 -TestCLI
-.\test-sbomai.ps1 -TestAPI
-.\test-sbomai.ps1 -TestMetrics
-.\test-sbomai.ps1 -GenerateReports
-```
-
-### Analyze Sample SBOMs
-
-```bash
-# Analyze SPDX sample
-docker exec -it sbomai-cli java -jar sbomai-cli/target/sbomai-cli-1.0.0-SNAPSHOT.jar analyze /app/sboms/spdx-sample.json --format SPDX --output JSON
-
-# Analyze CycloneDX sample
-docker exec -it sbomai-cli java -jar sbomai-cli/target/sbomai-cli-1.0.0-SNAPSHOT.jar analyze /app/sboms/cyclonedx-sample.json --format CYCLONEDX --output HTML
-```
-
-### Analyze a Repository
-
-```bash
-# Analyze a GitHub repository
-.\analyze-repo.ps1 -RepositoryUrl "https://github.com/example/repo.git" -All
-
-# Generate SBOM and analyze vulnerabilities
-.\analyze-repo.ps1 -RepositoryUrl "https://github.com/example/repo.git" -GenerateSBOM -AnalyzeVulnerabilities -GenerateReport
-```
-
-## 🏗️ Architecture
-
-SBOMAI is built as a modular microservices architecture:
-
-### Core Modules
-- **sbomai-parser**: Parse SPDX, CycloneDX, and SWID formats
-- **sbomai-vulnscan**: Scan against NVD, OSS Index, OSV databases
-- **sbomai-policy**: Enforce custom rules and policies
-- **sbomai-core**: Orchestrate analysis and AI predictions
-- **sbomai-cli**: Command-line interface for analysis
-
-### Monitoring Stack
-- **Grafana**: Dashboards and visualization
-- **Prometheus**: Metrics collection
-- **Loki**: Centralized logging
-- **Alertmanager**: Alerting and notifications
-
-## 📊 Key Features
-
-### SBOM Analysis
-- Parse multiple SBOM formats (SPDX, CycloneDX, SWID)
-- Unified internal representation
-- Format validation and error handling
-
-### Vulnerability Scanning
-- Integration with NVD, OSS Index, OSV
-- Real-time vulnerability database updates
-- Severity classification and scoring
-
-### AI-Powered Risk Analysis
-- Predictive risk scoring using ML/LLM models
-- Zero-day vulnerability prediction
-- Confidence intervals and model accuracy tracking
-
-### Policy Enforcement
-- Custom CVSS thresholds
-- License compliance checking
-- Build blocking and approval workflows
-
-### Real-time Monitoring
-- Live metrics and dashboards
-- Performance monitoring
-- Alerting for critical issues
-
-## 📈 Metrics & Reporting
-
-### Available Metrics
-- SBOM parsing throughput and errors
-- Vulnerability detection rates by severity
-- AI model performance and accuracy
-- Policy violation tracking
-- System health and performance
-
-### Report Formats
-- **JSON**: Machine-readable detailed reports
-- **HTML**: Human-readable visual reports
-- **TEXT**: Console-friendly output
-- **Grafana**: Interactive dashboards
-
-### Sample Queries
-```promql
-# SBOM parsing rate
-rate(sbomai_parser_files_parsed_total[5m])
-
-# CVE severity distribution
-sum by (severity) (sbomai_vulnscan_cves_found_total)
-
-# Policy violation rate
-rate(sbomai_policy_violations_total[5m])
-```
-
-## 🔧 Configuration
-
-### Environment Variables
-```bash
-# Core service configuration
-SBOMAI_PARSER_URL=http://sbomai-parser:8080
-SBOMAI_VULNSCAN_URL=http://sbomai-vulnscan:8080
-SBOMAI_POLICY_URL=http://sbomai-policy:8080
-
-# AI model configuration
-OPENAI_API_KEY=your-api-key
-AI_MODEL_PROVIDER=openai
-```
-
-### Application Properties
-```yaml
-# application.yml
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info,metrics,prometheus
-  metrics:
-    export:
-      prometheus:
-        enabled: true
-```
-
-## 🧪 Testing Scenarios
-
-### 1. Basic Functionality
-- Service health checks
-- SBOM parsing validation
-- CLI command execution
-- API endpoint testing
-
-### 2. Vulnerability Analysis
-- Sample SBOM analysis
-- CVE detection verification
-- Severity classification
-- Source attribution
-
-### 3. Performance Testing
-- Load testing with multiple files
-- Concurrent analysis testing
-- Memory and CPU monitoring
-- Response time measurement
-
-### 4. Integration Testing
-- Inter-service communication
-- Database connectivity
-- External API integration
-- Error handling
+### Service URLs
+- API Gateway: http://localhost:8080
+- Grafana: http://localhost:3000 (admin/sbomai2024)
+- Prometheus: http://localhost:9091
+- MinIO Console: http://localhost:9001
 
 ## 📚 Documentation
 
-- [Testing Guide](TESTING_GUIDE.md) - Comprehensive testing instructions
-- [Monitoring Setup](MONITORING_SETUP.md) - Grafana and Prometheus configuration
-- [API Documentation](docs/api.md) - REST API reference
-- [CLI Reference](docs/cli.md) - Command-line interface guide
+- [Architecture Overview](docs/ARCHITECTURE.md)
+- [API Documentation](docs/API.md)
+- [CLI Usage Guide](docs/CLI.md)
+- [Configuration Guide](docs/CONFIGURATION.md)
+- [Development Guide](docs/DEVELOPMENT.md)
+- [Monitoring Setup](docs/MONITORING.md)
+- [Integration Guide](docs/INTEGRATION.md)
 
-## 🎯 Success Criteria
+## 🛠️ Development
 
-A successful deployment should show:
-1. ✅ All services start without errors
-2. ✅ Sample SBOM files parse successfully
-3. ✅ Vulnerabilities are detected and categorized
-4. ✅ Policy violations are identified
-5. ✅ AI analysis provides risk scores
-6. ✅ Metrics are collected in Prometheus
-7. ✅ Dashboards display data in Grafana
-8. ✅ Reports are generated in multiple formats
-9. ✅ CLI commands execute successfully
-10. ✅ All health endpoints return healthy status
+### Building from Source
+
+```bash
+# Build all Java services
+mvn clean install
+
+# Build AI/ML Engine
+cd sbomai-engine
+python -m pip install -r requirements.txt
+python -m grpc_tools.protoc \
+    --python_out=./src \
+    --grpc_python_out=./src \
+    --proto_path=./protos \
+    ./protos/sbomai_ai.proto
+```
+
+### Running Tests
+
+```bash
+# Run all tests
+mvn test
+
+# Run specific module tests
+mvn test -pl sbomai-core
+
+# Run AI/ML Engine tests
+cd sbomai-engine
+pytest
+```
+
+### Code Quality
+
+```bash
+# Java
+mvn checkstyle:check
+mvn spotbugs:check
+
+# Python
+cd sbomai-engine
+black src/ tests/
+flake8 src/ tests/
+mypy src/
+```
 
 ## 🤝 Contributing
 
@@ -215,19 +168,20 @@ A successful deployment should show:
 2. Create a feature branch
 3. Make your changes
 4. Add tests
-5. Submit a pull request
+5. Run the test suite
+6. Submit a pull request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
+## 🙏 Acknowledgments
 
-For issues and questions:
-- Check the [Testing Guide](TESTING_GUIDE.md)
-- Review [Monitoring Setup](MONITORING_SETUP.md)
-- Open an issue on GitHub
-
----
-
-**SBOMAI** - Secure your software supply chain with AI-powered analysis! 🔍🤖
+- OpenAI GPT models for advanced reasoning
+- Anthropic Claude for safety-focused analysis
+- Google Gemini for efficient processing
+- PyTorch Geometric for graph neural networks
+- Spring Boot for robust microservices
+- Grafana Labs for monitoring tools

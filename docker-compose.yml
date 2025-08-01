@@ -1,144 +1,169 @@
 version: '3.8'
 
 services:
-  # Core SBOMAI Services
-  sbomai-core:
-    build:
-      context: .
-      dockerfile: sbomai-core/Dockerfile
+  # API Gateway
+  api-gateway:
+    build: ./sbomai-api-gateway
     ports:
-      - "8080:8080"
+      - "8080:8080"  # REST/GraphQL
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SBOMAI_PARSER_URL=http://sbomai-parser:8081
-      - SBOMAI_VULNSCAN_URL=http://sbomai-vulnscan:8082
-      - SBOMAI_POLICY_URL=http://sbomai-policy:8083
+      - SPRING_REDIS_HOST=redis
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+    depends_on:
+      - redis
+      - core
+      - ai-engine
+
+  # Core Service
+  core:
+    build: ./sbomai-core
+    ports:
+      - "8081:8081"  # Internal API
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_REDIS_HOST=redis
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/sbomai
+      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+    depends_on:
+      - postgres
+      - redis
+
+  # AI/ML Engine
+  engine:
+    build: ./sbomai-engine
+    ports:
+      - "50051:50051"  # gRPC
+      - "9090:9090"    # Metrics
+    environment:
+      - ENVIRONMENT=production
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    volumes:
+      - engine-models:/app/.cache
+
+  # Storage Service
+  storage:
+    build: ./sbomai-storage
+    ports:
+      - "8082:8082"  # Internal API
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/sbomai
+      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION}
+      - S3_BUCKET=${S3_BUCKET}
     depends_on:
-      - prometheus
-      - grafana
-    networks:
-      - sbomai-network
-    volumes:
-      - ./logs:/app/logs
+      - postgres
+      - minio
 
-  sbomai-parser:
-    build:
-      context: .
-      dockerfile: sbomai-parser/Dockerfile
+  # Integrations Service
+  integrations:
+    build: ./sbomai-integrations
     ports:
-      - "8081:8081"
+      - "8083:8083"  # Internal API
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SERVER_PORT=8081
-    networks:
-      - sbomai-network
-    volumes:
-      - ./logs:/app/logs
-
-  sbomai-vulnscan:
-    build:
-      context: .
-      dockerfile: sbomai-vulnscan/Dockerfile
-    ports:
-      - "8082:8082"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - SERVER_PORT=8082
-      - NVD_API_KEY=${NVD_API_KEY}
-    networks:
-      - sbomai-network
-    volumes:
-      - ./logs:/app/logs
-
-  sbomai-policy:
-    build:
-      context: .
-      dockerfile: sbomai-policy/Dockerfile
-    ports:
-      - "8083:8083"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - SERVER_PORT=8083
-    networks:
-      - sbomai-network
-    volumes:
-      - ./logs:/app/logs
-
-  sbomai-cli:
-    build:
-      context: .
-      dockerfile: sbomai-cli/Dockerfile
-    volumes:
-      - ./sboms:/app/sboms
-      - ./reports:/app/reports
-    environment:
-      - SBOMAI_CORE_URL=http://sbomai-core:8080
-    networks:
-      - sbomai-network
+      - SPRING_REDIS_HOST=redis
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - GITLAB_TOKEN=${GITLAB_TOKEN}
+      - JIRA_TOKEN=${JIRA_TOKEN}
     depends_on:
-      - sbomai-core
+      - redis
 
-  # Monitoring Stack
+  # PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=sbomai
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+  # MinIO (S3-compatible storage)
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"  # API
+      - "9001:9001"  # Console
+    environment:
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
+    volumes:
+      - minio-data:/data
+    command: server /data --console-address ":9001"
+
+  # Prometheus
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus
     ports:
-      - "9090:9090"
+      - "9091:9090"
     volumes:
-      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
+      - ./monitoring/prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/etc/prometheus/console_libraries'
-      - '--web.console.templates=/etc/prometheus/consoles'
-      - '--storage.tsdb.retention.time=200h'
-      - '--web.enable-lifecycle'
-    networks:
-      - sbomai-network
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
 
+  # Grafana
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana
     ports:
       - "3000:3000"
     environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=sbomai2024
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD}
+      - GF_USERS_ALLOW_SIGN_UP=false
     volumes:
-      - grafana_data:/var/lib/grafana
-      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
-      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
-    networks:
-      - sbomai-network
-    depends_on:
-      - prometheus
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards
+      - grafana-data:/var/lib/grafana
 
+  # Loki (Log Aggregation)
   loki:
-    image: grafana/loki:latest
+    image: grafana/loki
     ports:
       - "3100:3100"
-    command: -config.file=/etc/loki/local-config.yaml
     volumes:
-      - ./monitoring/loki-config.yml:/etc/loki/local-config.yaml
-    networks:
-      - sbomai-network
+      - ./monitoring/loki:/etc/loki
+      - loki-data:/loki
 
-  alertmanager:
-    image: prom/alertmanager:latest
-    ports:
-      - "9093:9093"
+  # Promtail (Log Collection)
+  promtail:
+    image: grafana/promtail
     volumes:
-      - ./monitoring/alertmanager.yml:/etc/alertmanager/alertmanager.yml
-    command:
-      - '--config.file=/etc/alertmanager/alertmanager.yml'
-      - '--storage.path=/alertmanager'
-    networks:
-      - sbomai-network
+      - ./monitoring/promtail:/etc/promtail
+      - /var/log:/var/log
+    command: -config.file=/etc/promtail/promtail-config.yml
 
 volumes:
-  prometheus_data:
-  grafana_data:
+  postgres-data:
+  redis-data:
+  minio-data:
+  engine-models:
+  prometheus-data:
+  grafana-data:
+  loki-data:
 
 networks:
-  sbomai-network:
-    driver: bridge 
+  default:
+    name: sbomai-network 

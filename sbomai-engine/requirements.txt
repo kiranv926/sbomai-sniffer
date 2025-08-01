@@ -1,0 +1,81 @@
+# Core gRPC dependencies
+grpcio==1.59.3
+grpcio-tools==1.59.3
+protobuf==4.25.1
+
+# AI & LLMs
+transformers==4.35.2
+torch==2.1.1
+sentence-transformers==2.2.2
+openai==1.3.7
+anthropic==0.7.8
+google-generativeai==0.3.2
+
+# ML Models
+scikit-learn==1.3.2
+xgboost==2.0.2
+lightgbm==4.1.0
+numpy==1.24.3
+pandas==2.1.4
+
+# Explainability
+shap==0.43.0
+lime==0.2.0.1
+
+# Graph Neural Networks
+torch-geometric==2.4.0
+networkx==3.2.1
+
+# Code Analysis
+codebert-base==1.0.1
+pygments==2.16.1
+radon==6.0.1
+bandit==1.7.5
+
+# Pattern Analysis
+regex==2023.10.3
+python-Levenshtein==0.23.0
+rapidfuzz==3.5.2
+textdistance==4.6.0
+
+# Visualization
+plotly==5.18.0
+networkx==3.2.1
+graphviz==0.20.1
+
+# Graph Neural Networks & Network Analysis
+torch-geometric==2.4.0
+networkx==3.2.1
+joblib==1.3.2
+
+# AI Reasoning & Chains
+langchain==0.0.350
+langchain-openai==0.0.2
+langchain-anthropic==0.0.1
+langchain-community==0.0.10
+
+# Data processing
+requests==2.31.0
+aiohttp==3.9.1
+beautifulsoup4==4.12.2
+lxml==4.9.3
+
+# Configuration & logging
+pydantic==2.5.0
+python-dotenv==1.0.0
+structlog==23.2.0
+
+# Monitoring & metrics
+prometheus-client==0.19.0
+opentelemetry-api==1.21.0
+opentelemetry-sdk==1.21.0
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-mock==3.12.0
+
+# Development
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1 
