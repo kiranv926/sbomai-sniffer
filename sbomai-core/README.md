@@ -1,238 +1,236 @@
-# SBOMAI Core Module
+﻿# SBOMAI Core Orchestrator
+# =======================
 
-The core engine of SBOMAI - an AI-powered Software Bill of Materials (SBOM) analysis tool. This module provides the foundational services for parsing, scanning, analyzing, and enforcing policies on SBOM documents.
+## Overview
 
-## Features
-
-- **SBOM Parsing**: Support for SPDX, CycloneDX, and SWID formats
-- **Vulnerability Scanning**: Integration with NVD, OSS Index, OSV, and other vulnerability databases
-- **AI-Powered Analysis**: Risk assessment and recommendations using OpenAI or local models
-- **Policy Enforcement**: License compliance, security thresholds, and custom business rules
-- **REST API**: Comprehensive REST endpoints for external module integration
-- **Clean Architecture**: Modular design with clear separation of concerns
+SBOMAI Core is the central orchestration service that manages the complete SBOM processing pipeline from raw ingestion to vulnerability analysis. It coordinates between different microservices and ensures data consistency across the entire system.
 
 ## Architecture
 
-The core module follows clean architecture principles with the following layers:
+`
+        
+   Kafka Topics        PostgreSQL DB        Microservices  
+                                                           
+ sbom.received      scans              Go Parser       
+ sbom.processed       sbom_documents       Python Engine   
+ vuln.detected        sbom_components                      
+ scan.completed       vulnerabilities                      
+ scan.failed          component_vulns                      
+        
+                              
+                              
+                    
+                      SBOMAI Core    
+                     Orchestrator    
+                                     
+                      Kafka Listener
+                      HTTP Client   
+                      JPA Repos     
+                      Event Publisher
+                    
+`
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    REST API Layer                           │
-├─────────────────────────────────────────────────────────────┤
-│                   Service Layer                             │
-├─────────────────────────────────────────────────────────────┤
-│                   Domain Layer                              │
-├─────────────────────────────────────────────────────────────┤
-│                   Ports (Interfaces)                        │
-├─────────────────────────────────────────────────────────────┤
-│                   Adapters (Implementations)                │
-└─────────────────────────────────────────────────────────────┘
-```
+## Features
 
-### Domain Entities
+- **Event-Driven Architecture**: Uses Apache Kafka for reliable message processing
+- **Microservice Integration**: Coordinates with Go parser and Python analysis services
+- **Database Management**: Stores and manages SBOM data in PostgreSQL
+- **Error Handling**: Comprehensive error handling with retry mechanisms
+- **Monitoring**: Health checks and metrics via Spring Actuator
+- **Scalability**: Concurrent message processing and connection pooling
 
-- `SbomDocument`: Core SBOM document representation
-- `SbomComponent`: Individual components within an SBOM
-- `Vulnerability`: Vulnerability information for components
-- `VulnerabilityReport`: Aggregated vulnerability scan results
-- `PolicyViolation`: Policy enforcement violations
-- `AiAnalysisResult`: AI-powered risk analysis results
+## Technology Stack
 
-### Core Interfaces
-
-- `SbomParser`: SBOM document parsing
-- `VulnerabilityScanner`: Vulnerability database scanning
-- `AiAnalyzer`: AI-powered risk analysis
-- `PolicyEnforcer`: Policy compliance checking
+- **Java 17** with Spring Boot 3.x
+- **Spring Kafka** for message queue integration
+- **Spring Data JPA** for database operations
+- **WebClient** for HTTP communication
+- **PostgreSQL** with JSONB support
+- **Apache Kafka** for event streaming
+- **Docker** for containerization
 
 ## Quick Start
 
-### Prerequisites
+### 1. Prerequisites
 
-- Java 17 or higher
-- Maven 3.6 or higher
-- OpenAI API key (for AI analysis)
-- NVD API key (optional, for enhanced vulnerability scanning)
+- Docker and Docker Compose
+- Java 17+
+- Maven 3.6+
 
-### Running the Application
+### 2. Start the Infrastructure
 
-1. **Clone and build the project:**
-   ```bash
-   mvn clean install
-   ```
+`ash
+# Start PostgreSQL, Kafka, and supporting services
+docker-compose up -d postgres kafka zookeeper kafka-ui pgadmin
+`
 
-2. **Set environment variables:**
-   ```bash
-   export OPENAI_API_KEY="your-openai-api-key"
-   export NVD_API_KEY="your-nvd-api-key"  # Optional
-   ```
+### 3. Build and Run
 
-3. **Run the application:**
-   ```bash
-   mvn spring-boot:run
-   ```
+`ash
+# Build the application
+mvn clean package
 
-4. **Access the application:**
-   - API Base URL: `http://localhost:8080/api/v1/sbom`
-   - Health Check: `http://localhost:8080/api/v1/sbom/health`
-   - H2 Console: `http://localhost:8080/h2-console`
+# Run the application
+java -jar target/sbomai-core-1.0.0-SNAPSHOT.jar
+`
+
+### 4. Access Services
+
+- **SBOMAI Core**: http://localhost:8080
+- **Kafka UI**: http://localhost:8081
+- **pgAdmin**: http://localhost:8082 (admin@sbomai.local / admin123)
+- **PostgreSQL**: localhost:5432
 
 ## API Endpoints
 
-### SBOM Analysis
+### Health Check
+`
+GET /api/v1/orchestration/health
+`
 
-- `POST /api/v1/sbom/analyze` - Analyze SBOM with default settings
-- `POST /api/v1/sbom/analyze/custom` - Analyze SBOM with custom parameters
-- `POST /api/v1/sbom/analyze/json` - Analyze SBOM from JSON content
+### Trigger SBOM Processing (Testing)
+`
+POST /api/v1/orchestration/trigger-sbom-processing
+Content-Type: application/json
 
-### System Information
+{
+  "scanId": "550e8400-e29b-41d4-a716-446655440000",
+  "rawSbomContent": "{...}",
+  "targetIdentifier": "alpine:latest",
+  "scanType": "docker_image"
+}
+`
 
-- `GET /api/v1/sbom/health` - Get system health status
-- `GET /api/v1/sbom/capabilities` - Get component capabilities
+## Kafka Topics
 
-### Example Usage
-
-```bash
-# Analyze an SBOM file
-curl -X POST \
-  http://localhost:8080/api/v1/sbom/analyze \
-  -H 'Content-Type: multipart/form-data' \
-  -F 'file=@/path/to/sbom.spdx' \
-  -F 'format=SPDX'
-
-# Check system health
-curl http://localhost:8080/api/v1/sbom/health
-
-# Get capabilities
-curl http://localhost:8080/api/v1/sbom/capabilities
-```
+- sbom.received - Incoming SBOM processing requests
+- sbom.processed - SBOM parsing completed
+- ulnerabilities.detected - Vulnerability analysis results
+- scan.completed - Scan processing completed
+- scan.failed - Scan processing failed
 
 ## Configuration
 
-The application can be configured through `application.yml` or environment variables:
+### Application Properties
 
-### Key Configuration Options
+`yaml
+# Database
+spring.datasource.url: jdbc:postgresql://localhost:5432/sbomai_db
+spring.datasource.username: sbomai_user
+spring.datasource.password: sbomai_password
 
-```yaml
-sbomai:
-  core:
-    analysis:
-      default-timeout: 300000  # 5 minutes
-      max-concurrent-analyses: 10
-      enable-parallel-processing: true
-    
-    scanner:
-      nvd:
-        enabled: true
-        api-key: ${NVD_API_KEY:}
-        rate-limit: 1000
-      oss-index:
-        enabled: true
-        username: ${OSS_INDEX_USERNAME:}
-        token: ${OSS_INDEX_TOKEN:}
-    
-    ai:
-      openai:
-        enabled: true
-        api-key: ${OPENAI_API_KEY:}
-        model: gpt-4
-        max-tokens: 4000
-        temperature: 0.3
-    
-    policy:
-      strict-mode: false
-      default-policies:
-        - license-compliance
-        - security-thresholds
-        - component-restrictions
-```
+# Kafka
+spring.kafka.bootstrap-servers: localhost:9092
+spring.kafka.consumer.group-id: sbomai-core
 
-### Environment Variables
+# Microservices
+sbomai.parser.url: http://localhost:8081
+sbomai.analysis.url: http://localhost:8082
+`
 
-- `OPENAI_API_KEY`: OpenAI API key for AI analysis
-- `NVD_API_KEY`: NVD API key for vulnerability scanning
-- `OSS_INDEX_USERNAME`: OSS Index username
-- `OSS_INDEX_TOKEN`: OSS Index API token
-- `LOCAL_MODEL_PATH`: Path to local AI model (if using local models)
+## Processing Pipeline
+
+### 1. SBOM Received Event
+- Consumes sbom.received message
+- Updates scan status to PARSING
+- Calls Go parser service
+- Saves raw SBOM to database
+- Extracts and stores components
+- Publishes sbom.processed event
+- Triggers vulnerability analysis
+
+### 2. Vulnerability Analysis
+- Receives analysis results via ulnerabilities.detected
+- Saves vulnerabilities to database
+- Links vulnerabilities to components
+- Updates scan status to COMPLETED
+- Publishes scan.completed event
+
+### 3. Error Handling
+- Comprehensive retry mechanisms
+- Dead letter queue for failed messages
+- Detailed error logging
+- Status tracking for all operations
 
 ## Development
 
-### Project Structure
+### Building from Source
 
-```
-src/main/java/com/sbomai/core/
-├── controllers/          # REST API controllers
-├── domain/              # Domain entities and enums
-├── ports/               # Interface definitions
-├── services/            # Business logic services
-└── SbomaiCoreApplication.java
-```
+`ash
+git clone <repository>
+cd sbomai-core
+mvn clean install
+`
 
-### Adding New Features
+### Running Tests
 
-1. **New SBOM Format**: Implement `SbomParser` interface
-2. **New Vulnerability Source**: Implement `VulnerabilityScanner` interface
-3. **New AI Model**: Implement `AiAnalyzer` interface
-4. **New Policy Type**: Implement `PolicyEnforcer` interface
-
-### Testing
-
-```bash
-# Run unit tests
+`ash
 mvn test
+`
 
-# Run integration tests
-mvn verify
+### Local Development
 
-# Run with coverage
-mvn jacoco:report
-```
+`ash
+# Start dependencies
+docker-compose up -d postgres kafka
 
-## Integration with Other Modules
+# Run application
+mvn spring-boot:run
+`
 
-The core module is designed to be consumed by other SBOMAI modules:
+## Monitoring
 
-- **CLI Module**: Uses REST API for local analysis
-- **GitHub Action**: Integrates via REST API for CI/CD
-- **Live Feed**: Processes real-time SBOMs via REST API
-- **VSCode Extension**: Provides IDE integration via REST API
-- **Dashboard**: Web UI consuming REST API
+### Health Checks
+- Application health: /actuator/health
+- Database connectivity
+- Kafka connectivity
+- Microservice connectivity
 
-## Monitoring and Observability
-
-- **Health Checks**: `/api/v1/sbom/health`
-- **Metrics**: Available via Spring Boot Actuator
-- **Logging**: Structured logging with SLF4J
-- **Database**: H2 in-memory database with console access
+### Metrics
+- Prometheus metrics: /actuator/prometheus
+- Custom business metrics
+- Performance monitoring
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. **OpenAI API Errors**: Check API key and rate limits
-2. **Vulnerability Scanner Failures**: Verify API keys and network connectivity
-3. **Memory Issues**: Adjust JVM heap size for large SBOMs
-4. **Timeout Errors**: Increase analysis timeout in configuration
+1. **Database Connection Failed**
+   - Check PostgreSQL is running
+   - Verify connection credentials
+   - Check network connectivity
+
+2. **Kafka Connection Failed**
+   - Ensure Kafka and Zookeeper are running
+   - Check bootstrap servers configuration
+   - Verify topic creation
+
+3. **Microservice Communication Failed**
+   - Check service URLs
+   - Verify service availability
+   - Check network connectivity
 
 ### Logs
 
-Enable debug logging for troubleshooting:
+`ash
+# View application logs
+docker logs sbomai-core
 
-```yaml
-logging:
-  level:
-    com.sbomai: DEBUG
-    org.springframework.web: DEBUG
-```
+# View Kafka logs
+docker logs sbomai-kafka
+
+# View database logs
+docker logs sbomai-postgres
+`
 
 ## Contributing
 
-1. Follow clean architecture principles
-2. Add comprehensive unit tests
-3. Update documentation
-4. Ensure all tests pass
-5. Follow the existing code style
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests
+5. Submit a pull request
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+This project is licensed under the MIT License.

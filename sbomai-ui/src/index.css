@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global CSS reset for body */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Disable max-width constraints globally */
+* {
+  max-width: none !important;
+}
+
+/* Reduce padding globally */
+.container, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl, .max-w-2xl, .max-w-xl, .max-w-lg, .max-w-md, .max-w-sm {
+  max-width: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Fix text clipping for gradient text */
+.bg-clip-text {
+  line-height: 1.2 !important;
+  padding-bottom: 0.1em !important;
+}
+
+/* Dark mode transitions */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure full viewport coverage for dark mode */
+html {
+  background-color: #f9fafb; /* Light mode background */
+}
+
+html.dark {
+  background-color: #111827; /* Dark mode background */
+}
+
+body {
+  background-color: #f9fafb; /* Light mode background */
+}
+
+body.dark {
+  background-color: #111827; /* Dark mode background */
+}
+
+/* Custom scrollbar for dark mode */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #374151;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #6b7280;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Hide scrollbar for breadcrumb navigation */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}

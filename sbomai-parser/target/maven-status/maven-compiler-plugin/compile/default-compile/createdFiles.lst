@@ -1,9 +1,0 @@
-com\sbomai\parser\domain\SbomDocument.class
-com\sbomai\parser\SbomaiParserApplication.class
-com\sbomai\parser\domain\SbomFormat.class
-com\sbomai\parser\domain\SbomRelationship.class
-com\sbomai\parser\domain\ParsingMetadata.class
-com\sbomai\parser\ports\SbomParsingException.class
-com\sbomai\parser\domain\SbomRelationship$RelationshipType.class
-com\sbomai\parser\ports\SbomParser.class
-com\sbomai\parser\domain\SbomComponent.class

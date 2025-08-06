@@ -1,0 +1,3618 @@
+{
+  "metadata": {
+    "generated_at": "2025-08-06T11:44:37.406354",
+    "sbom_format": "CycloneDX",
+    "sbom_version": "1.6",
+    "tool_used": "SBOMAI Go Parser + Python AI Engine"
+  },
+  "summary": {
+    "total_components": 72,
+    "total_vulnerabilities": 0,
+    "vulnerabilities_by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "average_risk_score": 0.1
+  },
+  "detailed_analysis": {
+    "timestamp": "2025-08-06T11:44:37.406040",
+    "components_analyzed": 72,
+    "vulnerabilities": [],
+    "risk_scores": {
+      "./.github/actions/gh-api-approve-run@UNKNOWN": 0.1,
+      "./.github/actions/gh-api-update-status@UNKNOWN": 0.1,
+      "./.github/actions/run-gradle@UNKNOWN": 0.1,
+      "./.github/actions/setup-gradle@UNKNOWN": 0.1,
+      "./.github/actions/setup-python@UNKNOWN": 0.1,
+      "./.github/workflows/build.yml@UNKNOWN": 0.1,
+      "actions/checkout@v4": 0.1,
+      "actions/download-artifact@v4": 0.1,
+      "actions/github-script@v7": 0.1,
+      "actions/labeler@v5": 0.1,
+      "actions/setup-java@v4": 0.1,
+      "actions/setup-python@v5": 0.1,
+      "actions/stale@v9": 0.1,
+      "actions/upload-artifact@v4": 0.1,
+      "aquasecurity/trivy-action@v0.24.0": 0.1,
+      "beautifulsoup4@4.12.3": 0.1,
+      "docker/login-action@v3.3.0": 0.1,
+      "docker/setup-buildx-action@v3.6.1": 0.1,
+      "docker/setup-qemu-action@v3.2.0": 0.1,
+      "ducktape@0.12.0": 0.1,
+      "gradle/actions/setup-gradle@94baf225fe0a508e581a564467443d0e2379123b": 0.1,
+      "jira@3.8.0": 0.1,
+      "jproperties@2.1.1": 0.1,
+      "kafka-streams@4.2.0-SNAPSHOT": 0.1,
+      "mock@5.1.0": 0.1,
+      "psutil@5.7.2": 0.1,
+      "pygithub@2.4.0": 0.1,
+      "pytest@8.3.3": 0.1,
+      "pytz@2024.2": 0.1,
+      "requests@2.31.0": 0.1,
+      "requests@2.32.3": 0.1,
+      "ruamel-yaml@0.18.6": 0.1,
+      "slf4j-reload4j@2.0.16": 0.1,
+      "streams-quickstart@4.2.0-SNAPSHOT": 0.1,
+      "streams-quickstart-java@4.2.0-SNAPSHOT": 0.1
+    },
+    "recommendations": []
+  },
+  "dashboard_data": {
+    "components": [
+      {
+        "bom-ref": "e8927febf403ba26",
+        "type": "library",
+        "name": "./.github/actions/gh-api-approve-run",
+        "version": "UNKNOWN",
+        "cpe": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-approve-run:.\\/.github\\/actions\\/gh-api-approve-run:*:*:*:*:*:*:*:*",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-approve-run:.\\/.github\\/actions\\/gh_api_approve_run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_approve_run:.\\/.github\\/actions\\/gh-api-approve-run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_approve_run:.\\/.github\\/actions\\/gh_api_approve_run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-approve:.\\/.github\\/actions\\/gh-api-approve-run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-approve:.\\/.github\\/actions\\/gh_api_approve_run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_approve:.\\/.github\\/actions\\/gh-api-approve-run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_approve:.\\/.github\\/actions\\/gh_api_approve_run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api:.\\/.github\\/actions\\/gh-api-approve-run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api:.\\/.github\\/actions\\/gh_api_approve_run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api:.\\/.github\\/actions\\/gh-api-approve-run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api:.\\/.github\\/actions\\/gh_api_approve_run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh:.\\/.github\\/actions\\/gh-api-approve-run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh:.\\/.github\\/actions\\/gh_api_approve_run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\pr-labeled.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "a826f9d13a136d8f",
+        "type": "library",
+        "name": "./.github/actions/gh-api-approve-run",
+        "version": "UNKNOWN",
+        "cpe": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-approve-run:.\\/.github\\/actions\\/gh-api-approve-run:*:*:*:*:*:*:*:*",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-approve-run:.\\/.github\\/actions\\/gh_api_approve_run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_approve_run:.\\/.github\\/actions\\/gh-api-approve-run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_approve_run:.\\/.github\\/actions\\/gh_api_approve_run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-approve:.\\/.github\\/actions\\/gh-api-approve-run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-approve:.\\/.github\\/actions\\/gh_api_approve_run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_approve:.\\/.github\\/actions\\/gh-api-approve-run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_approve:.\\/.github\\/actions\\/gh_api_approve_run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api:.\\/.github\\/actions\\/gh-api-approve-run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api:.\\/.github\\/actions\\/gh_api_approve_run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api:.\\/.github\\/actions\\/gh-api-approve-run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api:.\\/.github\\/actions\\/gh_api_approve_run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh:.\\/.github\\/actions\\/gh-api-approve-run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh:.\\/.github\\/actions\\/gh_api_approve_run:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\workflow-requested.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "4c09708c20b424f4",
+        "type": "library",
+        "name": "./.github/actions/gh-api-update-status",
+        "version": "UNKNOWN",
+        "cpe": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-update-status:.\\/.github\\/actions\\/gh-api-update-status:*:*:*:*:*:*:*:*",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-update-status:.\\/.github\\/actions\\/gh_api_update_status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_update_status:.\\/.github\\/actions\\/gh-api-update-status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_update_status:.\\/.github\\/actions\\/gh_api_update_status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-update:.\\/.github\\/actions\\/gh-api-update-status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-update:.\\/.github\\/actions\\/gh_api_update_status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_update:.\\/.github\\/actions\\/gh-api-update-status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_update:.\\/.github\\/actions\\/gh_api_update_status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api:.\\/.github\\/actions\\/gh-api-update-status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api:.\\/.github\\/actions\\/gh_api_update_status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api:.\\/.github\\/actions\\/gh-api-update-status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api:.\\/.github\\/actions\\/gh_api_update_status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh:.\\/.github\\/actions\\/gh-api-update-status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh:.\\/.github\\/actions\\/gh_api_update_status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\ci-complete.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "167f471070583a67",
+        "type": "library",
+        "name": "./.github/actions/gh-api-update-status",
+        "version": "UNKNOWN",
+        "cpe": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-update-status:.\\/.github\\/actions\\/gh-api-update-status:*:*:*:*:*:*:*:*",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-update-status:.\\/.github\\/actions\\/gh_api_update_status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_update_status:.\\/.github\\/actions\\/gh-api-update-status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_update_status:.\\/.github\\/actions\\/gh_api_update_status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-update:.\\/.github\\/actions\\/gh-api-update-status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api-update:.\\/.github\\/actions\\/gh_api_update_status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_update:.\\/.github\\/actions\\/gh-api-update-status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api_update:.\\/.github\\/actions\\/gh_api_update_status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api:.\\/.github\\/actions\\/gh-api-update-status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh-api:.\\/.github\\/actions\\/gh_api_update_status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api:.\\/.github\\/actions\\/gh-api-update-status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh_api:.\\/.github\\/actions\\/gh_api_update_status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh:.\\/.github\\/actions\\/gh-api-update-status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/gh:.\\/.github\\/actions\\/gh_api_update_status:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\pr-linter.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "3d1a3dfb13609c34",
+        "type": "library",
+        "name": "./.github/actions/run-gradle",
+        "version": "UNKNOWN",
+        "cpe": "cpe:2.3:a:.\\/.github\\/actions\\/run-gradle:.\\/.github\\/actions\\/run-gradle:*:*:*:*:*:*:*:*",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/run-gradle:.\\/.github\\/actions\\/run_gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/run_gradle:.\\/.github\\/actions\\/run-gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/run_gradle:.\\/.github\\/actions\\/run_gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/run:.\\/.github\\/actions\\/run-gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/run:.\\/.github\\/actions\\/run_gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\build.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "d299645669c8665c",
+        "type": "library",
+        "name": "./.github/actions/setup-gradle",
+        "version": "UNKNOWN",
+        "cpe": "cpe:2.3:a:.\\/.github\\/actions\\/setup-gradle:.\\/.github\\/actions\\/setup-gradle:*:*:*:*:*:*:*:*",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup-gradle:.\\/.github\\/actions\\/setup_gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup_gradle:.\\/.github\\/actions\\/setup-gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup_gradle:.\\/.github\\/actions\\/setup_gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup:.\\/.github\\/actions\\/setup-gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup:.\\/.github\\/actions\\/setup_gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\build.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "37e102f4e8c3e7c9",
+        "type": "library",
+        "name": "./.github/actions/setup-gradle",
+        "version": "UNKNOWN",
+        "cpe": "cpe:2.3:a:.\\/.github\\/actions\\/setup-gradle:.\\/.github\\/actions\\/setup-gradle:*:*:*:*:*:*:*:*",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup-gradle:.\\/.github\\/actions\\/setup_gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup_gradle:.\\/.github\\/actions\\/setup-gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup_gradle:.\\/.github\\/actions\\/setup_gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup:.\\/.github\\/actions\\/setup-gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup:.\\/.github\\/actions\\/setup_gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\ci-complete.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "1720d3bc68ad95e8",
+        "type": "library",
+        "name": "./.github/actions/setup-gradle",
+        "version": "UNKNOWN",
+        "cpe": "cpe:2.3:a:.\\/.github\\/actions\\/setup-gradle:.\\/.github\\/actions\\/setup-gradle:*:*:*:*:*:*:*:*",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup-gradle:.\\/.github\\/actions\\/setup_gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup_gradle:.\\/.github\\/actions\\/setup-gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup_gradle:.\\/.github\\/actions\\/setup_gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup:.\\/.github\\/actions\\/setup-gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup:.\\/.github\\/actions\\/setup_gradle:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\deflake.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "4fcdb9dc764f7ad3",
+        "type": "library",
+        "name": "./.github/actions/setup-python",
+        "version": "UNKNOWN",
+        "cpe": "cpe:2.3:a:.\\/.github\\/actions\\/setup-python:.\\/.github\\/actions\\/setup-python:*:*:*:*:*:*:*:*",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup-python:.\\/.github\\/actions\\/setup_python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup_python:.\\/.github\\/actions\\/setup-python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup_python:.\\/.github\\/actions\\/setup_python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup:.\\/.github\\/actions\\/setup-python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup:.\\/.github\\/actions\\/setup_python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\build.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "c884bf08fec5f07e",
+        "type": "library",
+        "name": "./.github/actions/setup-python",
+        "version": "UNKNOWN",
+        "cpe": "cpe:2.3:a:.\\/.github\\/actions\\/setup-python:.\\/.github\\/actions\\/setup-python:*:*:*:*:*:*:*:*",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup-python:.\\/.github\\/actions\\/setup_python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup_python:.\\/.github\\/actions\\/setup-python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup_python:.\\/.github\\/actions\\/setup_python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup:.\\/.github\\/actions\\/setup-python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup:.\\/.github\\/actions\\/setup_python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\deflake.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "a7c34733cf826b11",
+        "type": "library",
+        "name": "./.github/actions/setup-python",
+        "version": "UNKNOWN",
+        "cpe": "cpe:2.3:a:.\\/.github\\/actions\\/setup-python:.\\/.github\\/actions\\/setup-python:*:*:*:*:*:*:*:*",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup-python:.\\/.github\\/actions\\/setup_python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup_python:.\\/.github\\/actions\\/setup-python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup_python:.\\/.github\\/actions\\/setup_python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup:.\\/.github\\/actions\\/setup-python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:.\\/.github\\/actions\\/setup:.\\/.github\\/actions\\/setup_python:*:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\generate-reports.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "78d03487b13c8aae",
+        "type": "library",
+        "name": "./.github/workflows/build.yml",
+        "version": "UNKNOWN",
+        "cpe": "cpe:2.3:a:.\\/.github\\/workflows\\/build.yml:.\\/.github\\/workflows\\/build.yml:*:*:*:*:*:*:*:*",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-action-workflow-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action-workflow"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\ci.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/checkout@v4?package-id=c7a0a115736417e5",
+        "type": "library",
+        "name": "actions/checkout",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/checkout@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\build.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/checkout@v4?package-id=a12af4020af7cd80",
+        "type": "library",
+        "name": "actions/checkout",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/checkout@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\ci-complete.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/checkout@v4?package-id=833c7d02f5b631bc",
+        "type": "library",
+        "name": "actions/checkout",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/checkout@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\deflake.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/checkout@v4?package-id=f820cdf860090b01",
+        "type": "library",
+        "name": "actions/checkout",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/checkout@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_build_and_test.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/checkout@v4?package-id=5a9755fee5e84e00",
+        "type": "library",
+        "name": "actions/checkout",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/checkout@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_official_image_build_and_test.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/checkout@v4?package-id=3f1230e7a08fb170",
+        "type": "library",
+        "name": "actions/checkout",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/checkout@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_rc_release.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/checkout@v4?package-id=9c705e63943c57ba",
+        "type": "library",
+        "name": "actions/checkout",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/checkout@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\generate-reports.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/checkout@v4?package-id=dd8ef8f63eb348c7",
+        "type": "library",
+        "name": "actions/checkout",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/checkout@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\pr-labeled.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/checkout@v4?package-id=d305dc3bfb689735",
+        "type": "library",
+        "name": "actions/checkout",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/checkout@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\pr-linter.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/checkout@v4?package-id=9025adff49282fdc",
+        "type": "library",
+        "name": "actions/checkout",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/checkout@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\pr-update.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/checkout@v4?package-id=41fe64150392cb30",
+        "type": "library",
+        "name": "actions/checkout",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/checkout@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\prepare_docker_official_image_source.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/checkout@v4?package-id=9cf027676f5e9004",
+        "type": "library",
+        "name": "actions/checkout",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/checkout@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\workflow-requested.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/download-artifact@v4?package-id=0859bb2c45bf62d8",
+        "type": "library",
+        "name": "actions/download-artifact",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/download-artifact:actions\\/download-artifact:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/download-artifact@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download-artifact:actions\\/download_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download_artifact:actions\\/download-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download_artifact:actions\\/download_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download:actions\\/download-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download:actions\\/download_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\build.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/download-artifact@v4?package-id=bc19578e7f6bb384",
+        "type": "library",
+        "name": "actions/download-artifact",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/download-artifact:actions\\/download-artifact:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/download-artifact@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download-artifact:actions\\/download_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download_artifact:actions\\/download-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download_artifact:actions\\/download_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download:actions\\/download-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download:actions\\/download_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\ci-complete.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/download-artifact@v4?package-id=a90693cd7975b81f",
+        "type": "library",
+        "name": "actions/download-artifact",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/download-artifact:actions\\/download-artifact:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/download-artifact@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download-artifact:actions\\/download_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download_artifact:actions\\/download-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download_artifact:actions\\/download_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download:actions\\/download-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/download:actions\\/download_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\pr-linter.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/github-script@v7?package-id=89d32cacc375adc9",
+        "type": "library",
+        "name": "actions/github-script",
+        "version": "v7",
+        "cpe": "cpe:2.3:a:actions\\/github-script:actions\\/github-script:v7:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/github-script@v7",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/github-script:actions\\/github_script:v7:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/github_script:actions\\/github-script:v7:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/github_script:actions\\/github_script:v7:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/github:actions\\/github-script:v7:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/github:actions\\/github_script:v7:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\pr-labels-cron.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/labeler@v5?package-id=71e0a10ea7b50b1d",
+        "type": "library",
+        "name": "actions/labeler",
+        "version": "v5",
+        "cpe": "cpe:2.3:a:actions\\/labeler:actions\\/labeler:v5:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/labeler@v5",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\pr-update.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/setup-java@v4?package-id=254d7d7eb286b936",
+        "type": "library",
+        "name": "actions/setup-java",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/setup-java:actions\\/setup-java:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/setup-java@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup-java:actions\\/setup_java:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup_java:actions\\/setup-java:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup_java:actions\\/setup_java:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup:actions\\/setup-java:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup:actions\\/setup_java:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\actions\\setup-gradle\\action.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/setup-python@v5?package-id=65439ef235ca202f",
+        "type": "library",
+        "name": "actions/setup-python",
+        "version": "v5",
+        "cpe": "cpe:2.3:a:actions\\/setup-python:actions\\/setup-python:v5:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/setup-python@v5",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup-python:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup_python:actions\\/setup-python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup_python:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup:actions\\/setup-python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\actions\\setup-python\\action.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/setup-python@v5?package-id=6e4834affc004f62",
+        "type": "library",
+        "name": "actions/setup-python",
+        "version": "v5",
+        "cpe": "cpe:2.3:a:actions\\/setup-python:actions\\/setup-python:v5:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/setup-python@v5",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup-python:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup_python:actions\\/setup-python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup_python:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup:actions\\/setup-python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_build_and_test.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/setup-python@v5?package-id=b1615b4163ae26b4",
+        "type": "library",
+        "name": "actions/setup-python",
+        "version": "v5",
+        "cpe": "cpe:2.3:a:actions\\/setup-python:actions\\/setup-python:v5:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/setup-python@v5",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup-python:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup_python:actions\\/setup-python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup_python:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup:actions\\/setup-python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_official_image_build_and_test.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/setup-python@v5?package-id=ab6e55ae7077e75d",
+        "type": "library",
+        "name": "actions/setup-python",
+        "version": "v5",
+        "cpe": "cpe:2.3:a:actions\\/setup-python:actions\\/setup-python:v5:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/setup-python@v5",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup-python:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup_python:actions\\/setup-python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup_python:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup:actions\\/setup-python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_rc_release.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/setup-python@v5?package-id=fd9e9c64cf6ed0fb",
+        "type": "library",
+        "name": "actions/setup-python",
+        "version": "v5",
+        "cpe": "cpe:2.3:a:actions\\/setup-python:actions\\/setup-python:v5:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/setup-python@v5",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup-python:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup_python:actions\\/setup-python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup_python:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup:actions\\/setup-python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/setup:actions\\/setup_python:v5:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\prepare_docker_official_image_source.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/stale@v9?package-id=6051ffade1f6821a",
+        "type": "library",
+        "name": "actions/stale",
+        "version": "v9",
+        "cpe": "cpe:2.3:a:actions\\/stale:actions\\/stale:v9:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/stale@v9",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\pr-labels-cron.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/stale@v9?package-id=ce6e575937cf3d2f",
+        "type": "library",
+        "name": "actions/stale",
+        "version": "v9",
+        "cpe": "cpe:2.3:a:actions\\/stale:actions\\/stale:v9:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/stale@v9",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\stale.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/upload-artifact@v4?package-id=4921f4d66179caba",
+        "type": "library",
+        "name": "actions/upload-artifact",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/upload-artifact@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\actions\\run-gradle\\action.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/upload-artifact@v4?package-id=e5548180ea8e9e78",
+        "type": "library",
+        "name": "actions/upload-artifact",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/upload-artifact@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\build.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/upload-artifact@v4?package-id=580da32c63431b13",
+        "type": "library",
+        "name": "actions/upload-artifact",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/upload-artifact@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\deflake.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/upload-artifact@v4?package-id=a2a4350efc8301a9",
+        "type": "library",
+        "name": "actions/upload-artifact",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/upload-artifact@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_build_and_test.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/upload-artifact@v4?package-id=449233da7867b5d9",
+        "type": "library",
+        "name": "actions/upload-artifact",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/upload-artifact@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_official_image_build_and_test.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/upload-artifact@v4?package-id=576c453bc8a12d40",
+        "type": "library",
+        "name": "actions/upload-artifact",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/upload-artifact@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_scan.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/upload-artifact@v4?package-id=c17e93cda569c255",
+        "type": "library",
+        "name": "actions/upload-artifact",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/upload-artifact@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\pr-reviewed.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/actions/upload-artifact@v4?package-id=34b707934642a867",
+        "type": "library",
+        "name": "actions/upload-artifact",
+        "version": "v4",
+        "cpe": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*",
+        "purl": "pkg:github/actions/upload-artifact@v4",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload-artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload_artifact:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload-artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:actions\\/upload:actions\\/upload_artifact:v4:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\prepare_docker_official_image_source.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/aquasecurity/trivy-action@v0.24.0?package-id=5b98180128a63750",
+        "type": "library",
+        "name": "aquasecurity/trivy-action",
+        "version": "v0.24.0",
+        "cpe": "cpe:2.3:a:aquasecurity\\/trivy-action:aquasecurity\\/trivy-action:v0.24.0:*:*:*:*:*:*:*",
+        "purl": "pkg:github/aquasecurity/trivy-action@v0.24.0",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy-action:aquasecurity\\/trivy_action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy_action:aquasecurity\\/trivy-action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy_action:aquasecurity\\/trivy_action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy:aquasecurity\\/trivy-action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy:aquasecurity\\/trivy_action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_build_and_test.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/aquasecurity/trivy-action@v0.24.0?package-id=d051a81af234e13a",
+        "type": "library",
+        "name": "aquasecurity/trivy-action",
+        "version": "v0.24.0",
+        "cpe": "cpe:2.3:a:aquasecurity\\/trivy-action:aquasecurity\\/trivy-action:v0.24.0:*:*:*:*:*:*:*",
+        "purl": "pkg:github/aquasecurity/trivy-action@v0.24.0",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy-action:aquasecurity\\/trivy_action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy_action:aquasecurity\\/trivy-action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy_action:aquasecurity\\/trivy_action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy:aquasecurity\\/trivy-action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy:aquasecurity\\/trivy_action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_official_image_build_and_test.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/aquasecurity/trivy-action@v0.24.0?package-id=ca159896e39461e2",
+        "type": "library",
+        "name": "aquasecurity/trivy-action",
+        "version": "v0.24.0",
+        "cpe": "cpe:2.3:a:aquasecurity\\/trivy-action:aquasecurity\\/trivy-action:v0.24.0:*:*:*:*:*:*:*",
+        "purl": "pkg:github/aquasecurity/trivy-action@v0.24.0",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy-action:aquasecurity\\/trivy_action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy_action:aquasecurity\\/trivy-action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy_action:aquasecurity\\/trivy_action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy:aquasecurity\\/trivy-action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:aquasecurity\\/trivy:aquasecurity\\/trivy_action:v0.24.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_scan.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:pypi/beautifulsoup4@4.12.3?package-id=678dd0f9db5d7955",
+        "type": "library",
+        "name": "beautifulsoup4",
+        "version": "4.12.3",
+        "cpe": "cpe:2.3:a:python-beautifulsoup4:python-beautifulsoup4:4.12.3:*:*:*:*:*:*:*",
+        "purl": "pkg:pypi/beautifulsoup4@4.12.3",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "python-package-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "python-pip-requirements-entry"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-beautifulsoup4:python_beautifulsoup4:4.12.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_beautifulsoup4:python-beautifulsoup4:4.12.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_beautifulsoup4:python_beautifulsoup4:4.12.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:beautifulsoup4:python-beautifulsoup4:4.12.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:beautifulsoup4:python_beautifulsoup4:4.12.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-beautifulsoup4:beautifulsoup4:4.12.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_beautifulsoup4:beautifulsoup4:4.12.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:beautifulsoup4:beautifulsoup4:4.12.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python-beautifulsoup4:4.12.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python_beautifulsoup4:4.12.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:beautifulsoup4:4.12.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\committer-tools\\requirements.txt"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/docker/login-action@v3.3.0?package-id=5c8bf61a7f1279f6",
+        "type": "library",
+        "name": "docker/login-action",
+        "version": "v3.3.0",
+        "cpe": "cpe:2.3:a:docker\\/login-action:docker\\/login-action:v3.3.0:*:*:*:*:*:*:*",
+        "purl": "pkg:github/docker/login-action@v3.3.0",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/login-action:docker\\/login_action:v3.3.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/login_action:docker\\/login-action:v3.3.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/login_action:docker\\/login_action:v3.3.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/login:docker\\/login-action:v3.3.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/login:docker\\/login_action:v3.3.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_promote.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/docker/login-action@v3.3.0?package-id=b0c3608401b0d3fc",
+        "type": "library",
+        "name": "docker/login-action",
+        "version": "v3.3.0",
+        "cpe": "cpe:2.3:a:docker\\/login-action:docker\\/login-action:v3.3.0:*:*:*:*:*:*:*",
+        "purl": "pkg:github/docker/login-action@v3.3.0",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/login-action:docker\\/login_action:v3.3.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/login_action:docker\\/login-action:v3.3.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/login_action:docker\\/login_action:v3.3.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/login:docker\\/login-action:v3.3.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/login:docker\\/login_action:v3.3.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_rc_release.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/docker/setup-buildx-action@v3.6.1?package-id=6bc98f4a9791af96",
+        "type": "library",
+        "name": "docker/setup-buildx-action",
+        "version": "v3.6.1",
+        "cpe": "cpe:2.3:a:docker\\/setup-buildx-action:docker\\/setup-buildx-action:v3.6.1:*:*:*:*:*:*:*",
+        "purl": "pkg:github/docker/setup-buildx-action@v3.6.1",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup-buildx-action:docker\\/setup_buildx_action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_buildx_action:docker\\/setup-buildx-action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_buildx_action:docker\\/setup_buildx_action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup-buildx:docker\\/setup-buildx-action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup-buildx:docker\\/setup_buildx_action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_buildx:docker\\/setup-buildx-action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_buildx:docker\\/setup_buildx_action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup:docker\\/setup-buildx-action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup:docker\\/setup_buildx_action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_promote.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/docker/setup-buildx-action@v3.6.1?package-id=5e5cd2b8b1f0b616",
+        "type": "library",
+        "name": "docker/setup-buildx-action",
+        "version": "v3.6.1",
+        "cpe": "cpe:2.3:a:docker\\/setup-buildx-action:docker\\/setup-buildx-action:v3.6.1:*:*:*:*:*:*:*",
+        "purl": "pkg:github/docker/setup-buildx-action@v3.6.1",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup-buildx-action:docker\\/setup_buildx_action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_buildx_action:docker\\/setup-buildx-action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_buildx_action:docker\\/setup_buildx_action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup-buildx:docker\\/setup-buildx-action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup-buildx:docker\\/setup_buildx_action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_buildx:docker\\/setup-buildx-action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_buildx:docker\\/setup_buildx_action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup:docker\\/setup-buildx-action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup:docker\\/setup_buildx_action:v3.6.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_rc_release.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/docker/setup-qemu-action@v3.2.0?package-id=49167d9a6776b361",
+        "type": "library",
+        "name": "docker/setup-qemu-action",
+        "version": "v3.2.0",
+        "cpe": "cpe:2.3:a:docker\\/setup-qemu-action:docker\\/setup-qemu-action:v3.2.0:*:*:*:*:*:*:*",
+        "purl": "pkg:github/docker/setup-qemu-action@v3.2.0",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup-qemu-action:docker\\/setup_qemu_action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_qemu_action:docker\\/setup-qemu-action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_qemu_action:docker\\/setup_qemu_action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup-qemu:docker\\/setup-qemu-action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup-qemu:docker\\/setup_qemu_action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_qemu:docker\\/setup-qemu-action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_qemu:docker\\/setup_qemu_action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup:docker\\/setup-qemu-action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup:docker\\/setup_qemu_action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_promote.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/docker/setup-qemu-action@v3.2.0?package-id=245441f6b4b14b6e",
+        "type": "library",
+        "name": "docker/setup-qemu-action",
+        "version": "v3.2.0",
+        "cpe": "cpe:2.3:a:docker\\/setup-qemu-action:docker\\/setup-qemu-action:v3.2.0:*:*:*:*:*:*:*",
+        "purl": "pkg:github/docker/setup-qemu-action@v3.2.0",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup-qemu-action:docker\\/setup_qemu_action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_qemu_action:docker\\/setup-qemu-action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_qemu_action:docker\\/setup_qemu_action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup-qemu:docker\\/setup-qemu-action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup-qemu:docker\\/setup_qemu_action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_qemu:docker\\/setup-qemu-action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup_qemu:docker\\/setup_qemu_action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup:docker\\/setup-qemu-action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:docker\\/setup:docker\\/setup_qemu_action:v3.2.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\workflows\\docker_rc_release.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:pypi/ducktape@0.12.0?package-id=5b9ec1715fbf3dda",
+        "type": "library",
+        "name": "ducktape",
+        "version": "0.12.0",
+        "cpe": "cpe:2.3:a:python-ducktape:python-ducktape:0.12.0:*:*:*:*:*:*:*",
+        "purl": "pkg:pypi/ducktape@0.12.0",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "python-package-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "python-pip-requirements-entry"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-ducktape:python_ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_ducktape:python-ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_ducktape:python_ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ducktape:python-ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ducktape:python_ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-ducktape:ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_ducktape:ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python-ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python_ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ducktape:ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\tests\\docker\\requirements.txt"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:pypi/ducktape@0.12.0?package-id=a6cb40e8edbbb5a5",
+        "type": "library",
+        "name": "ducktape",
+        "version": "0.12.0",
+        "cpe": "cpe:2.3:a:python-ducktape:python-ducktape:0.12.0:*:*:*:*:*:*:*",
+        "purl": "pkg:pypi/ducktape@0.12.0",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "python-package-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "python"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-ducktape:python_ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_ducktape:python-ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_ducktape:python_ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ducktape:python-ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ducktape:python_ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-ducktape:ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_ducktape:ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python-ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python_ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ducktape:ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:ducktape:0.12.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\tests\\setup.py"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:github/gradle/actions@94baf225fe0a508e581a564467443d0e2379123b?package-id=3f0cf53fff877496#setup-gradle",
+        "type": "library",
+        "name": "gradle/actions/setup-gradle",
+        "version": "94baf225fe0a508e581a564467443d0e2379123b",
+        "cpe": "cpe:2.3:a:gradle\\/actions\\/setup-gradle:gradle\\/actions\\/setup-gradle:94baf225fe0a508e581a564467443d0e2379123b:*:*:*:*:*:*:*",
+        "purl": "pkg:github/gradle/actions@94baf225fe0a508e581a564467443d0e2379123b#setup-gradle",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "github-actions-usage-cataloger"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "github-action"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "github-actions-use-statement"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:gradle\\/actions\\/setup-gradle:gradle\\/actions\\/setup_gradle:94baf225fe0a508e581a564467443d0e2379123b:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:gradle\\/actions\\/setup_gradle:gradle\\/actions\\/setup-gradle:94baf225fe0a508e581a564467443d0e2379123b:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:gradle\\/actions\\/setup_gradle:gradle\\/actions\\/setup_gradle:94baf225fe0a508e581a564467443d0e2379123b:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:gradle\\/actions\\/setup:gradle\\/actions\\/setup-gradle:94baf225fe0a508e581a564467443d0e2379123b:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:gradle\\/actions\\/setup:gradle\\/actions\\/setup_gradle:94baf225fe0a508e581a564467443d0e2379123b:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\actions\\setup-gradle\\action.yml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:pypi/jira@3.8.0?package-id=56de82ffcaf96f04",
+        "type": "library",
+        "name": "jira",
+        "version": "3.8.0",
+        "cpe": "cpe:2.3:a:python-jira:python-jira:3.8.0:*:*:*:*:*:*:*",
+        "purl": "pkg:pypi/jira@3.8.0",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "python-package-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "python-pip-requirements-entry"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-jira:python_jira:3.8.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_jira:python-jira:3.8.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_jira:python_jira:3.8.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python-jira:3.8.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python_jira:3.8.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:jira:python-jira:3.8.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:jira:python_jira:3.8.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-jira:jira:3.8.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_jira:jira:3.8.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:jira:3.8.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:jira:jira:3.8.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\release\\requirements.txt"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:pypi/jproperties@2.1.1?package-id=40e0d9e01759d88f",
+        "type": "library",
+        "name": "jproperties",
+        "version": "2.1.1",
+        "cpe": "cpe:2.3:a:python-jproperties:python-jproperties:2.1.1:*:*:*:*:*:*:*",
+        "purl": "pkg:pypi/jproperties@2.1.1",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "python-package-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "python-pip-requirements-entry"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-jproperties:python_jproperties:2.1.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_jproperties:python-jproperties:2.1.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_jproperties:python_jproperties:2.1.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:jproperties:python-jproperties:2.1.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:jproperties:python_jproperties:2.1.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-jproperties:jproperties:2.1.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_jproperties:jproperties:2.1.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python-jproperties:2.1.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python_jproperties:2.1.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:jproperties:jproperties:2.1.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:jproperties:2.1.1:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\release\\requirements.txt"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:maven/org.apache.kafka/kafka-streams@4.2.0-SNAPSHOT?package-id=52c5372d7ca3dacb",
+        "type": "library",
+        "group": "org.apache.kafka",
+        "name": "kafka-streams",
+        "version": "4.2.0-SNAPSHOT",
+        "cpe": "cpe:2.3:a:apache:kafka-streams:4.2.0-SNAPSHOT:*:*:*:*:*:*:*",
+        "purl": "pkg:maven/org.apache.kafka/kafka-streams@4.2.0-SNAPSHOT",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "java-pom-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "java"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "java-archive"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "java-archive"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:apache:kafka_streams:4.2.0-SNAPSHOT:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:apache:kafka:4.2.0-SNAPSHOT:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\streams\\quickstart\\java\\src\\main\\resources\\archetype-resources\\pom.xml"
+          },
+          {
+            "name": "syft:metadata:-:artifactID",
+            "value": "kafka-streams"
+          },
+          {
+            "name": "syft:metadata:-:groupID",
+            "value": "org.apache.kafka"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:pypi/mock@5.1.0?package-id=47032b9593eb7ae7",
+        "type": "library",
+        "name": "mock",
+        "version": "5.1.0",
+        "cpe": "cpe:2.3:a:python-mock:python-mock:5.1.0:*:*:*:*:*:*:*",
+        "purl": "pkg:pypi/mock@5.1.0",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "python-package-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "python"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-mock:python_mock:5.1.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_mock:python-mock:5.1.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_mock:python_mock:5.1.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python-mock:5.1.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python_mock:5.1.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:mock:python-mock:5.1.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:mock:python_mock:5.1.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-mock:mock:5.1.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_mock:mock:5.1.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:mock:5.1.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:mock:mock:5.1.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\tests\\setup.py"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:pypi/psutil@5.7.2?package-id=723f199830b309fa",
+        "type": "library",
+        "name": "psutil",
+        "version": "5.7.2",
+        "cpe": "cpe:2.3:a:python-psutil:python-psutil:5.7.2:*:*:*:*:*:*:*",
+        "purl": "pkg:pypi/psutil@5.7.2",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "python-package-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "python"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-psutil:python_psutil:5.7.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_psutil:python-psutil:5.7.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_psutil:python_psutil:5.7.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:psutil:python-psutil:5.7.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:psutil:python_psutil:5.7.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-psutil:psutil:5.7.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python-psutil:5.7.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python_psutil:5.7.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_psutil:psutil:5.7.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:psutil:psutil:5.7.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:psutil:5.7.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\tests\\setup.py"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:pypi/pygithub@2.4.0?package-id=2c688bc63b675a7e",
+        "type": "library",
+        "name": "pygithub",
+        "version": "2.4.0",
+        "cpe": "cpe:2.3:a:python-pygithub:python-pygithub:2.4.0:*:*:*:*:*:*:*",
+        "purl": "pkg:pypi/pygithub@2.4.0",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "python-package-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "python-pip-requirements-entry"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-pygithub:python_pygithub:2.4.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_pygithub:python-pygithub:2.4.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_pygithub:python_pygithub:2.4.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:pygithub:python-pygithub:2.4.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:pygithub:python_pygithub:2.4.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-pygithub:pygithub:2.4.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_pygithub:pygithub:2.4.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python-pygithub:2.4.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python_pygithub:2.4.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:pygithub:pygithub:2.4.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:pygithub:2.4.0:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\committer-tools\\requirements.txt"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:pypi/pytest@8.3.3?package-id=81e6bbf01559d373",
+        "type": "library",
+        "name": "pytest",
+        "version": "8.3.3",
+        "cpe": "cpe:2.3:a:python-pytest:python-pytest:8.3.3:*:*:*:*:*:*:*",
+        "purl": "pkg:pypi/pytest@8.3.3",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "python-package-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "python"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-pytest:python_pytest:8.3.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_pytest:python-pytest:8.3.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_pytest:python_pytest:8.3.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:pytest:python-pytest:8.3.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:pytest:python_pytest:8.3.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-pytest:pytest:8.3.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python-pytest:8.3.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python_pytest:8.3.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_pytest:pytest:8.3.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:pytest:pytest:8.3.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:pytest:8.3.3:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\tests\\setup.py"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:pypi/pytz@2024.2?package-id=273e489b7c205833",
+        "type": "library",
+        "name": "pytz",
+        "version": "2024.2",
+        "cpe": "cpe:2.3:a:python-pytz:python-pytz:2024.2:*:*:*:*:*:*:*",
+        "purl": "pkg:pypi/pytz@2024.2",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "python-package-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "python-pip-requirements-entry"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-pytz:python_pytz:2024.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_pytz:python-pytz:2024.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_pytz:python_pytz:2024.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python-pytz:2024.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python_pytz:2024.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-pytz:pytz:2024.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_pytz:pytz:2024.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:pytz:python-pytz:2024.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:pytz:python_pytz:2024.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:pytz:2024.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:pytz:pytz:2024.2:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\scripts\\requirements.txt"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:pypi/requests@2.31.0?package-id=9f2066c5628c0e60",
+        "type": "library",
+        "name": "requests",
+        "version": "2.31.0",
+        "cpe": "cpe:2.3:a:python:requests:2.31.0:*:*:*:*:*:*:*",
+        "purl": "pkg:pypi/requests@2.31.0",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "python-package-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "python"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\tests\\setup.py"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:pypi/requests@2.32.3?package-id=b654882f0b03e93e",
+        "type": "library",
+        "name": "requests",
+        "version": "2.32.3",
+        "cpe": "cpe:2.3:a:python:requests:2.32.3:*:*:*:*:*:*:*",
+        "purl": "pkg:pypi/requests@2.32.3",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "python-package-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "python-pip-requirements-entry"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\.github\\scripts\\requirements.txt"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:pypi/ruamel-yaml@0.18.6?package-id=16a484e2b17bc1a0",
+        "type": "library",
+        "name": "ruamel-yaml",
+        "version": "0.18.6",
+        "cpe": "cpe:2.3:a:python-ruamel-yaml:python-ruamel-yaml:0.18.6:*:*:*:*:*:*:*",
+        "purl": "pkg:pypi/ruamel-yaml@0.18.6",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "python-package-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "python"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "python-pip-requirements-entry"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-ruamel-yaml:python_ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_ruamel_yaml:python-ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_ruamel_yaml:python_ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-ruamel:python-ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-ruamel:python_ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_ruamel:python-ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_ruamel:python_ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-ruamel-yaml:ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-ruamel-yaml:ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_ruamel_yaml:ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_ruamel_yaml:ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ruamel-yaml:python-ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ruamel-yaml:python_ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ruamel_yaml:python-ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ruamel_yaml:python_ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-ruamel:ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python-ruamel:ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python-ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:python_ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_ruamel:ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python_ruamel:ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ruamel:python-ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ruamel:python_ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ruamel-yaml:ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ruamel-yaml:ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ruamel_yaml:ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ruamel_yaml:ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:python:ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ruamel:ruamel-yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:ruamel:ruamel_yaml:0.18.6:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\committer-tools\\requirements.txt"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:maven/org.slf4j/slf4j-reload4j@2.0.16?package-id=4eecc64bed0fc187",
+        "type": "library",
+        "group": "org.slf4j",
+        "name": "slf4j-reload4j",
+        "version": "2.0.16",
+        "cpe": "cpe:2.3:a:slf4j-reload4j:slf4j-reload4j:2.0.16:*:*:*:*:*:*:*",
+        "purl": "pkg:maven/org.slf4j/slf4j-reload4j@2.0.16",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "java-pom-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "java"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "java-archive"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "java-archive"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:slf4j-reload4j:slf4j_reload4j:2.0.16:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:slf4j_reload4j:slf4j-reload4j:2.0.16:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:slf4j_reload4j:slf4j_reload4j:2.0.16:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:org.slf4j:slf4j-reload4j:2.0.16:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:org.slf4j:slf4j_reload4j:2.0.16:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:slf4j:slf4j-reload4j:2.0.16:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:slf4j:slf4j_reload4j:2.0.16:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\streams\\quickstart\\java\\src\\main\\resources\\archetype-resources\\pom.xml"
+          },
+          {
+            "name": "syft:metadata:-:artifactID",
+            "value": "slf4j-reload4j"
+          },
+          {
+            "name": "syft:metadata:-:groupID",
+            "value": "org.slf4j"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:maven/org.apache.kafka/streams-quickstart@4.2.0-SNAPSHOT?package-id=09fb7d29833c4f2a",
+        "type": "library",
+        "name": "streams-quickstart",
+        "version": "4.2.0-SNAPSHOT",
+        "cpe": "cpe:2.3:a:apache:streams-quickstart:4.2.0-SNAPSHOT:*:*:*:*:*:*:*",
+        "purl": "pkg:maven/org.apache.kafka/streams-quickstart@4.2.0-SNAPSHOT",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "java-pom-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "java"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "java-archive"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "java-archive"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:apache:streams_quickstart:4.2.0-SNAPSHOT:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:apache:kafka:4.2.0-SNAPSHOT:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\streams\\quickstart\\pom.xml"
+          }
+        ]
+      },
+      {
+        "bom-ref": "pkg:maven/org.apache.kafka/streams-quickstart-java@4.2.0-SNAPSHOT?package-id=168f86605869f9c4",
+        "type": "library",
+        "name": "streams-quickstart-java",
+        "version": "4.2.0-SNAPSHOT",
+        "cpe": "cpe:2.3:a:apache:streams-quickstart-java:4.2.0-SNAPSHOT:*:*:*:*:*:*:*",
+        "purl": "pkg:maven/org.apache.kafka/streams-quickstart-java@4.2.0-SNAPSHOT",
+        "properties": [
+          {
+            "name": "syft:package:foundBy",
+            "value": "java-pom-cataloger"
+          },
+          {
+            "name": "syft:package:language",
+            "value": "java"
+          },
+          {
+            "name": "syft:package:type",
+            "value": "java-archive"
+          },
+          {
+            "name": "syft:package:metadataType",
+            "value": "java-archive"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:apache:streams_quickstart_java:4.2.0-SNAPSHOT:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:cpe23",
+            "value": "cpe:2.3:a:apache:kafka:4.2.0-SNAPSHOT:*:*:*:*:*:*:*"
+          },
+          {
+            "name": "syft:location:0:path",
+            "value": "\\streams\\quickstart\\java\\pom.xml"
+          }
+        ]
+      }
+    ],
+    "vulnerabilities": [],
+    "risk_scores": {
+      "./.github/actions/gh-api-approve-run@UNKNOWN": 0.1,
+      "./.github/actions/gh-api-update-status@UNKNOWN": 0.1,
+      "./.github/actions/run-gradle@UNKNOWN": 0.1,
+      "./.github/actions/setup-gradle@UNKNOWN": 0.1,
+      "./.github/actions/setup-python@UNKNOWN": 0.1,
+      "./.github/workflows/build.yml@UNKNOWN": 0.1,
+      "actions/checkout@v4": 0.1,
+      "actions/download-artifact@v4": 0.1,
+      "actions/github-script@v7": 0.1,
+      "actions/labeler@v5": 0.1,
+      "actions/setup-java@v4": 0.1,
+      "actions/setup-python@v5": 0.1,
+      "actions/stale@v9": 0.1,
+      "actions/upload-artifact@v4": 0.1,
+      "aquasecurity/trivy-action@v0.24.0": 0.1,
+      "beautifulsoup4@4.12.3": 0.1,
+      "docker/login-action@v3.3.0": 0.1,
+      "docker/setup-buildx-action@v3.6.1": 0.1,
+      "docker/setup-qemu-action@v3.2.0": 0.1,
+      "ducktape@0.12.0": 0.1,
+      "gradle/actions/setup-gradle@94baf225fe0a508e581a564467443d0e2379123b": 0.1,
+      "jira@3.8.0": 0.1,
+      "jproperties@2.1.1": 0.1,
+      "kafka-streams@4.2.0-SNAPSHOT": 0.1,
+      "mock@5.1.0": 0.1,
+      "psutil@5.7.2": 0.1,
+      "pygithub@2.4.0": 0.1,
+      "pytest@8.3.3": 0.1,
+      "pytz@2024.2": 0.1,
+      "requests@2.31.0": 0.1,
+      "requests@2.32.3": 0.1,
+      "ruamel-yaml@0.18.6": 0.1,
+      "slf4j-reload4j@2.0.16": 0.1,
+      "streams-quickstart@4.2.0-SNAPSHOT": 0.1,
+      "streams-quickstart-java@4.2.0-SNAPSHOT": 0.1
+    }
+  }
+}

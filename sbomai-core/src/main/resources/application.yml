@@ -1,122 +1,59 @@
-# SBOMAI Core Application Configuration
-spring:
-  application:
-    name: sbomai-core
-  
-  # Database Configuration
-  datasource:
-    url: jdbc:h2:mem:sbomai
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: 
-  
-  # JPA Configuration
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: false
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-        format_sql: true
-  
-  # H2 Console (for development)
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-  
-  # File Upload Configuration
-  servlet:
-    multipart:
-      max-file-size: 50MB
-      max-request-size: 50MB
+﻿# SBOMAI Core Application Properties
+# =================================
 
 # Server Configuration
-server:
-  port: 8080
-  servlet:
-    context-path: /
-  
+server.port=8080
+server.servlet.context-path=/api/v1
+
+# Database Configuration (PostgreSQL)
+spring.datasource.url=jdbc:postgresql://localhost:5432/sbomai_db
+spring.datasource.username=sbomai_user
+spring.datasource.password=sbomai_password
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# JPA Configuration
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+# Kafka Configuration
+spring.kafka.bootstrap-servers=localhost:9092
+spring.kafka.consumer.group-id=sbomai-core
+spring.kafka.consumer.auto-offset-reset=earliest
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.value-deserializer=org.springframework.kafka.support.serializer.JsonDeserializer
+spring.kafka.consumer.properties.spring.json.trusted.packages=*
+spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer
+
+# Kafka Topics
+kafka.topics.sbom.received=sbom.received
+kafka.topics.sbom.processed=sbom.processed
+kafka.topics.vulnerabilities.detected=vulnerabilities.detected
+kafka.topics.scan.completed=scan.completed
+kafka.topics.scan.failed=scan.failed
+
+# Microservice URLs
+sbomai.parser.url=http://localhost:8081
+sbomai.analysis.url=http://localhost:8082
+
 # Logging Configuration
-logging:
-  level:
-    com.sbomai: INFO
-    org.springframework.web: INFO
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
-
-# SBOMAI Specific Configuration
-sbomai:
-  core:
-    # Analysis Configuration
-    analysis:
-      default-timeout: 300000 # 5 minutes in milliseconds
-      max-concurrent-analyses: 10
-      enable-parallel-processing: true
-    
-    # Vulnerability Scanner Configuration
-    scanner:
-      nvd:
-        enabled: true
-        api-key: ${NVD_API_KEY:}
-        rate-limit: 1000 # requests per hour
-      oss-index:
-        enabled: true
-        username: ${OSS_INDEX_USERNAME:}
-        token: ${OSS_INDEX_TOKEN:}
-      osv:
-        enabled: true
-        api-url: https://api.osv.dev/v1
-    
-    # AI Analysis Configuration
-    ai:
-      provider: auto  # auto, openai, local
-      openai:
-        enabled: true
-        api-key: ${OPENAI_API_KEY:}
-        model: gpt-4
-        max-tokens: 4000
-        temperature: 0.3
-      local:
-        enabled: true  # Enable local AI by default
-        model-path: ${LOCAL_MODEL_PATH:}
-    
-    # Policy Enforcement Configuration
-    policy:
-      strict-mode: false
-      default-policies:
-        - license-compliance
-        - security-thresholds
-        - component-restrictions
-      blocking-violations:
-        - critical-vulnerabilities
-        - forbidden-licenses
-
-# Management Endpoints
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info,metrics,prometheus,capabilities
-  endpoint:
-    health:
-      show-details: when-authorized
-    prometheus:
-      enabled: true
-  info:
-    env:
-      enabled: true
-  metrics:
-    export:
-      prometheus:
-        enabled: true
-    tags:
-      application: sbomai-core
-      module: core
+logging.level.com.sbomai.core=INFO
+logging.level.org.springframework.kafka=INFO
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
 
 # Actuator Configuration
-management.endpoints.web.base-path: /actuator
-management.endpoint.health.show-details: always 
+management.endpoints.web.exposure.include=health,info,metrics,prometheus
+management.endpoint.health.show-details=always
+
+# Connection Pool Configuration
+spring.datasource.hikari.maximum-pool-size=20
+spring.datasource.hikari.minimum-idle=5
+spring.datasource.hikari.connection-timeout=30000
+spring.datasource.hikari.idle-timeout=600000
+spring.datasource.hikari.max-lifetime=1800000
+
+# WebClient Configuration
+spring.webflux.base-url=http://localhost:8080

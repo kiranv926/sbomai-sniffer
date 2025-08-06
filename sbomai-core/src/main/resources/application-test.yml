@@ -1,0 +1,41 @@
+﻿# SBOMAI Core Application Properties for Testing
+# =============================================
+
+# Server Configuration
+server.port=8080
+server.servlet.context-path=/api/v1
+
+# Database Configuration (H2 for testing)
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+
+# H2 Console
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+# JPA Configuration
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+# Disable Kafka for testing
+spring.kafka.bootstrap-servers=
+spring.kafka.consumer.group-id=
+spring.kafka.producer.key-serializer=
+spring.kafka.producer.value-serializer=
+
+# Microservice URLs (mock for testing)
+sbomai.parser.url=http://localhost:8081
+sbomai.analysis.url=http://localhost:8082
+
+# Logging Configuration
+logging.level.com.sbomai.core=INFO
+logging.level.org.springframework.web=INFO
+logging.level.org.hibernate.SQL=DEBUG
+
+# Actuator Configuration
+management.endpoints.web.exposure.include=health,info,metrics
+management.endpoint.health.show-details=always
