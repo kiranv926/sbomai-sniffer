@@ -1,5 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, Cell, Area, AreaChart } from 'recharts';
+import { useDashboardInsights, useVulnerabilityStatistics, useScanStatistics, usePortfolioRecommendations } from '../hooks/useApi';
 
 interface SummaryData {
   totalSboms: number;
@@ -59,237 +60,152 @@ const Dashboard: React.FC = () => {
   const [selectedSeverity, setSelectedSeverity] = useState<string>('all');
   const [timeFilter, setTimeFilter] = useState<string>('30');
 
-  // Mock data for summary cards - will be filtered based on time range
+  // Real API data hooks
+  const { data: dashboardInsights, loading: insightsLoading, error: insightsError, execute: fetchInsights } = useDashboardInsights();
+  const { data: vulnerabilityStats, loading: vulnLoading, error: vulnError, execute: fetchVulnStats } = useVulnerabilityStatistics();
+  const { data: scanStats, loading: scanLoading, error: scanError, execute: fetchScanStats } = useScanStatistics();
+  const { data: aiRecommendations, loading: aiLoading, error: aiError, execute: fetchAIRecommendations } = usePortfolioRecommendations();
+
+  // Fetch data on component mount
+  useEffect(() => {
+    fetchInsights();
+    fetchVulnStats();
+    fetchScanStats();
+    fetchAIRecommendations();
+  }, [fetchInsights, fetchVulnStats, fetchScanStats, fetchAIRecommendations]);
+
+  // Real data for summary cards
   const getSummaryData = (): SummaryData => {
-    const days = parseInt(timeFilter);
-    
-    // Adjust summary data based on time filter
-    const timeMultiplier = days / 30; // Base on 30 days
-    
+    if (insightsLoading || vulnLoading) {
+      return {
+        totalSboms: 0,
+        openVulnerabilities: { critical: 0, total: 0 },
+        policyViolations: 0,
+        aiSuggestions: 0
+      };
+    }
+
     return {
-      totalSboms: Math.round(1202 * timeMultiplier),
+      totalSboms: dashboardInsights?.totalSboms || 0,
       openVulnerabilities: {
-        critical: Math.round(342 * timeMultiplier),
-        total: Math.round(1040 * timeMultiplier)
+        critical: vulnerabilityStats?.criticalCount || 0,
+        total: vulnerabilityStats?.totalVulnerabilities || 0
       },
-      policyViolations: Math.round(58 * timeMultiplier),
-      aiSuggestions: Math.round(214 * timeMultiplier)
+      policyViolations: dashboardInsights?.policyViolations || 0,
+      aiSuggestions: aiRecommendations?.length || 0
     };
   };
 
   const summaryData = getSummaryData();
 
-  // Generate dynamic trend data based on current date
-  const generateTrendData = (): TrendData[] => {
-    const data: TrendData[] = [];
-    const today = new Date();
-    
-    // Generate data for the last 90 days
-    for (let i = 90; i >= 0; i -= 15) {
-      const date = new Date(today);
-      date.setDate(date.getDate() - i);
-      
-      // Create realistic vulnerability data with some variation
-      const baseCritical = 45 + Math.floor(Math.random() * 20);
-      const baseHigh = 120 + Math.floor(Math.random() * 30);
-      const baseMedium = 85 + Math.floor(Math.random() * 20);
-      
-      // Add some spikes for realism
-      let critical = baseCritical;
-      let high = baseHigh;
-      let medium = baseMedium;
-      let predicted = 0;
-      
-      // Create a spike around 30 days ago
-      if (i === 30) {
-        critical = 342;
-        high = 180;
-        medium = 105;
-        predicted = 380;
-      }
-      
-      // Add some future predictions
-      if (i < 0) {
-        predicted = 420 + Math.floor(Math.random() * 50);
-      }
-      
-      data.push({
-        date: date.toISOString().split('T')[0],
-        critical,
-        high,
-        medium,
-        predicted
-      });
+  // Real trend data from API
+  const getTrendData = (): TrendData[] => {
+    if (insightsLoading || !dashboardInsights?.trendData) {
+      return [];
     }
-    
-    return data;
+
+    return dashboardInsights.trendData.map((item: any) => ({
+      date: item.date,
+      critical: item.critical || 0,
+      high: item.high || 0,
+      medium: item.medium || 0,
+      predicted: item.predicted || 0
+    }));
   };
 
-  const allTrendData: TrendData[] = generateTrendData();
+  const trendData = getTrendData();
 
-  // Filter trend data based on time filter
-  const getFilteredTrendData = () => {
-    const days = parseInt(timeFilter);
-    const cutoffDate = new Date();
-    cutoffDate.setDate(cutoffDate.getDate() - days);
-    
-    return allTrendData.filter(item => {
-      const itemDate = new Date(item.date);
-      return itemDate >= cutoffDate;
-    });
-  };
-
-  const trendData = getFilteredTrendData();
-
-  // Mock data for SBOM coverage by project - filtered based on time range
+  // Real project coverage data
   const getProjectCoverage = (): ProjectCoverage[] => {
-    const days = parseInt(timeFilter);
-    const timeMultiplier = days / 30;
-    
-    // Base coverage data - coverage percentages should remain realistic
-    const baseData = [
-      { name: 'Frontend API', baseCoverage: 87, baseOutdated: 12, baseRisk: 23 },
-      { name: 'Backend Service', baseCoverage: 92, baseOutdated: 8, baseRisk: 15 },
-      { name: 'Mobile App', baseCoverage: 78, baseOutdated: 18, baseRisk: 34 },
-      { name: 'Admin Dashboard', baseCoverage: 95, baseOutdated: 5, baseRisk: 8 },
-      { name: 'Data Pipeline', baseCoverage: 83, baseOutdated: 15, baseRisk: 28 }
-    ];
-    
-    return baseData.map(project => {
-      // Coverage should remain realistic (not scaled by time)
-      const coverage = Math.min(100, project.baseCoverage + (days > 30 ? Math.floor(Math.random() * 5) : 0));
-      
-      // Outdated packages and risk scores can scale with time
-      const outdatedPackages = Math.max(1, Math.round(project.baseOutdated * timeMultiplier));
-      const riskScore = Math.min(100, Math.round(project.baseRisk * timeMultiplier));
-      
-      return {
-        name: project.name,
-        coverage,
-        outdatedPackages,
-        riskScore
-      };
-    });
+    if (insightsLoading || !dashboardInsights?.projectCoverage) {
+      return [];
+    }
+
+    return dashboardInsights.projectCoverage.map((item: any) => ({
+      name: item.name,
+      coverage: item.coverage || 0,
+      outdatedPackages: item.outdatedPackages || 0,
+      riskScore: item.riskScore || 0
+    }));
   };
 
   const projectCoverage = getProjectCoverage();
 
-  // Mock data for most at-risk repos - filtered based on time range
+  // Real at-risk repos data
   const getAtRiskRepos = (): AtRiskRepo[] => {
-    const days = parseInt(timeFilter);
-    const timeMultiplier = days / 30; // Base on 30 days
-    
-    return [
-      { 
-        name: 'payment-service', 
-        riskScore: Math.min(100, Math.round(92 * timeMultiplier)), 
-        criticalVulns: Math.round(8 * timeMultiplier), 
-        aiNote: 'High transitive risk due to log4j-core' 
-      },
-      { 
-        name: 'user-auth-api', 
-        riskScore: Math.min(100, Math.round(87 * timeMultiplier)), 
-        criticalVulns: Math.round(6 * timeMultiplier), 
-        aiNote: 'Multiple outdated Spring dependencies' 
-      },
-      { 
-        name: 'data-processor', 
-        riskScore: Math.min(100, Math.round(78 * timeMultiplier)), 
-        criticalVulns: Math.round(4 * timeMultiplier), 
-        aiNote: 'Apache Commons vulnerabilities detected' 
-      },
-      { 
-        name: 'notification-service', 
-        riskScore: Math.min(100, Math.round(65 * timeMultiplier)), 
-        criticalVulns: Math.round(3 * timeMultiplier), 
-        aiNote: 'Express.js path traversal risk' 
-      },
-      { 
-        name: 'analytics-engine', 
-        riskScore: Math.min(100, Math.round(58 * timeMultiplier)), 
-        criticalVulns: Math.round(2 * timeMultiplier), 
-        aiNote: 'Lodash prototype pollution detected' 
-      }
-    ];
+    if (insightsLoading || !dashboardInsights?.atRiskRepos) {
+      return [];
+    }
+
+    return dashboardInsights.atRiskRepos.map((item: any) => ({
+      name: item.name,
+      riskScore: item.riskScore || 0,
+      criticalVulns: item.criticalVulns || 0,
+      aiNote: item.aiNote || 'No AI analysis available'
+    }));
   };
 
   const atRiskRepos = getAtRiskRepos();
 
-  // Mock data for AI recommendations - filtered based on time range
-  const getAIRecommendations = (): AIRecommendation[] => {
-    const days = parseInt(timeFilter);
-    const timeMultiplier = days / 30; // Base on 30 days
-    
-    return [
-      { 
-        id: '1', 
-        title: 'Upgrade commons-io', 
-        description: 'You should upgrade commons-io in 4 projects', 
-        impact: 'High', 
-        affectedProjects: Math.round(4 * timeMultiplier) 
-      },
-      { 
-        id: '2', 
-        title: 'Replace moment.js', 
-        description: 'Consider replacing moment.js with dayjs in 3 projects', 
-        impact: 'Medium', 
-        affectedProjects: Math.round(3 * timeMultiplier) 
-      },
-      { 
-        id: '3', 
-        title: 'Update Spring Framework', 
-        description: 'Update Spring Framework to latest version in 2 projects', 
-        impact: 'High', 
-        affectedProjects: Math.round(2 * timeMultiplier) 
-      },
-      { 
-        id: '4', 
-        title: 'Remove unused dependencies', 
-        description: 'Remove 15 unused dependencies across projects', 
-        impact: 'Low', 
-        affectedProjects: Math.round(6 * timeMultiplier) 
-      },
-      { 
-        id: '5', 
-        title: 'Add security headers', 
-        description: 'Implement security headers in 3 API projects', 
-        impact: 'Medium', 
-        affectedProjects: Math.round(3 * timeMultiplier) 
-      }
-    ];
+  // Real AI recommendations data
+  const getAIRecommendationsData = (): AIRecommendation[] => {
+    if (aiLoading || !aiRecommendations) {
+      return [];
+    }
+
+    return aiRecommendations.map((rec: any) => ({
+      id: rec.id || Math.random().toString(),
+      title: rec.title || 'AI Recommendation',
+      description: rec.description || 'No description available',
+      impact: rec.priority === 'HIGH' ? 'High' : rec.priority === 'MEDIUM' ? 'Medium' : 'Low',
+      affectedProjects: rec.affectedProjects || 1
+    }));
   };
 
-  const aiRecommendations = getAIRecommendations();
+  const aiRecommendationsData = getAIRecommendationsData();
 
-  // Get time-aware automation score data
+  // Real automation score data
   const getAutomationScoreData = () => {
-    const days = parseInt(timeFilter);
-    const timeMultiplier = days / 30; // Base on 30 days
-    
+    if (insightsLoading || !dashboardInsights?.automationScores) {
+      return { overall: 0, critical: 0, high: 0, medium: 0 };
+    }
+
+    const scores = dashboardInsights.automationScores;
     return {
-      overall: Math.round(78 * timeMultiplier),
-      critical: Math.round(85 * timeMultiplier),
-      high: Math.round(72 * timeMultiplier),
-      medium: Math.round(65 * timeMultiplier)
+      overall: scores.overall || 0,
+      critical: scores.critical || 0,
+      high: scores.high || 0,
+      medium: scores.medium || 0
     };
   };
 
   const automationScoreData = getAutomationScoreData();
 
-  // Mock data for security metrics
+  // Real security metrics data
   const getSecurityMetrics = (): SecurityMetrics => {
-    const days = parseInt(timeFilter);
-    const timeMultiplier = days / 30;
-    
+    if (insightsLoading || scanLoading) {
+      return {
+        networkScans: 0,
+        webScans: 0,
+        directoryScans: 0,
+        osDetections: 0,
+        totalVulnerabilities: 0,
+        remediationProgress: 0,
+        complianceScore: 0,
+        threatIntelligence: 0
+      };
+    }
+
+    const metrics = dashboardInsights?.securityMetrics || {};
     return {
-      networkScans: Math.round(156 * timeMultiplier),
-      webScans: Math.round(89 * timeMultiplier),
-      directoryScans: Math.round(234 * timeMultiplier),
-      osDetections: Math.round(67 * timeMultiplier),
-      totalVulnerabilities: Math.round(1247 * timeMultiplier),
-      remediationProgress: Math.round(78 * timeMultiplier),
-      complianceScore: Math.round(92 * timeMultiplier),
-      threatIntelligence: Math.round(156 * timeMultiplier)
+      networkScans: scanStats?.totalScans || 0,
+      webScans: metrics.webScans || 0,
+      directoryScans: metrics.directoryScans || 0,
+      osDetections: metrics.osDetections || 0,
+      totalVulnerabilities: vulnerabilityStats?.totalVulnerabilities || 0,
+      remediationProgress: metrics.remediationProgress || 0,
+      complianceScore: metrics.complianceScore || 0,
+      threatIntelligence: metrics.threatIntelligence || 0
     };
   };
 
@@ -298,52 +214,57 @@ const Dashboard: React.FC = () => {
   // Get risk score color
   const getRiskScoreColor = (score: number) => {
     if (score >= 80) return '#dc2626'; // Red
-    if (score >= 60) return '#f97316'; // Orange
-    if (score >= 40) return '#eab308'; // Yellow
-    return '#22c55e'; // Green
+    if (score >= 60) return '#ea580c'; // Orange
+    if (score >= 40) return '#ca8a04'; // Yellow
+    return '#16a34a'; // Green
   };
 
   // Get impact color
   const getImpactColor = (impact: string) => {
     switch (impact) {
       case 'High': return '#dc2626';
-      case 'Medium': return '#f97316';
-      case 'Low': return '#22c55e';
+      case 'Medium': return '#ea580c';
+      case 'Low': return '#16a34a';
       default: return '#6b7280';
     }
   };
 
-  // Get status color
-
-
   // Handle file upload
-  const handleFileUpload = useCallback((files: FileList | null) => {
-    if (!files || files.length === 0) return;
-
+  const handleFileUpload = useCallback(async (files: FileList) => {
     setIsUploading(true);
     setUploadProgress(0);
-
+    
     // Simulate upload progress
     const interval = setInterval(() => {
       setUploadProgress(prev => {
-        if (prev >= 100) {
+        if (prev >= 90) {
           clearInterval(interval);
-          setIsUploading(false);
-          alert('SBOM uploaded successfully! AI analysis completed.');
-          return 0;
+          return 90;
         }
         return prev + 10;
       });
     }, 200);
-  }, []);
+
+    // Simulate API call
+    setTimeout(() => {
+      clearInterval(interval);
+      setUploadProgress(100);
+      setIsUploading(false);
+      // Refresh data after upload
+      fetchInsights();
+      fetchVulnStats();
+      fetchScanStats();
+      fetchAIRecommendations();
+    }, 2000);
+  }, [fetchInsights, fetchVulnStats, fetchScanStats, fetchAIRecommendations]);
 
   // Handle drag events
   const handleDrag = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.type === 'dragenter' || e.type === 'dragover') {
+    if (e.type === "dragenter" || e.type === "dragover") {
       setDragActive(true);
-    } else if (e.type === 'dragleave') {
+    } else if (e.type === "dragleave") {
       setDragActive(false);
     }
   }, []);
@@ -352,8 +273,65 @@ const Dashboard: React.FC = () => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    handleFileUpload(e.dataTransfer.files);
+    
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFileUpload(e.dataTransfer.files);
+    }
   }, [handleFileUpload]);
+
+  const handleFileInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      handleFileUpload(e.target.files);
+    }
+  }, [handleFileUpload]);
+
+  // Loading state
+  if (insightsLoading && vulnLoading && scanLoading && aiLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 p-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-1/4 mb-6"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="bg-white p-6 rounded-lg shadow">
+                  <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+                  <div className="h-8 bg-gray-200 rounded w-1/3"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (insightsError || vulnError || scanError || aiError) {
+    return (
+      <div className="min-h-screen bg-gray-50 p-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <h3 className="text-red-800 font-medium">Error loading dashboard data</h3>
+            <p className="text-red-600 mt-1">
+              {insightsError || vulnError || scanError || aiError}
+            </p>
+            <button 
+              onClick={() => {
+                fetchInsights();
+                fetchVulnStats();
+                fetchScanStats();
+                fetchAIRecommendations();
+              }}
+              className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-full bg-gray-50 dark:bg-gray-900">
@@ -737,7 +715,7 @@ const Dashboard: React.FC = () => {
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">🧠 AI Recommendations (Last {timeFilter} Days)</h3>
             <div className="space-y-3 max-h-64 overflow-y-auto">
-              {aiRecommendations.map((rec) => (
+              {aiRecommendationsData.map((rec) => (
                 <div key={rec.id} className="p-3 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -830,7 +808,7 @@ const Dashboard: React.FC = () => {
                       type="file"
                       className="hidden"
                       accept=".json,.xml,.spdx"
-                      onChange={(e) => handleFileUpload(e.target.files)}
+                      onChange={handleFileInput}
                     />
                   </label>
                 </div>

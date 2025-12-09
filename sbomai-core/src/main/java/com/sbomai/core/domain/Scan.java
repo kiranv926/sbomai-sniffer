@@ -37,6 +37,16 @@ public class Scan {
     @Column(name = "sbom_document_id")
     private UUID sbomDocumentId;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private Project project;
+    
+    @Column(name = "vulnerabilities_found")
+    private Integer vulnerabilitiesFound = 0;
+    
+    @Column(name = "risk_score")
+    private Double riskScore = 0.0;
+    
     // Constructors
     public Scan() {
         this.createdAt = LocalDateTime.now();
@@ -122,5 +132,29 @@ public class Scan {
     
     public void setSbomDocumentId(UUID sbomDocumentId) {
         this.sbomDocumentId = sbomDocumentId;
+    }
+    
+    public Project getProject() {
+        return project;
+    }
+    
+    public void setProject(Project project) {
+        this.project = project;
+    }
+    
+    public Integer getVulnerabilitiesFound() {
+        return vulnerabilitiesFound;
+    }
+    
+    public void setVulnerabilitiesFound(Integer vulnerabilitiesFound) {
+        this.vulnerabilitiesFound = vulnerabilitiesFound;
+    }
+    
+    public Double getRiskScore() {
+        return riskScore;
+    }
+    
+    public void setRiskScore(Double riskScore) {
+        this.riskScore = riskScore;
     }
 } 

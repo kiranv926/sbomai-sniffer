@@ -32,7 +32,7 @@ WORKDIR /app
 # Copy application code
 COPY protos/ /app/protos/
 COPY src/ /app/src/
-COPY server.py /app/
+COPY main.py /app/
 
 # Generate gRPC code
 RUN python -m grpc_tools.protoc \
@@ -45,8 +45,10 @@ RUN python -m grpc_tools.protoc \
 RUN mkdir -p /app/.cache && chown sbomai:sbomai /app/.cache
 
 # Expose ports
-EXPOSE 50051  # gRPC
-EXPOSE 9090   # Metrics
+# gRPC
+EXPOSE 50051
+# Metrics
+EXPOSE 9090
 
 # Set environment variables
 ENV PYTHONPATH=/app/src
@@ -57,5 +59,5 @@ ENV ENVIRONMENT=production
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:9090/health || exit 1
 
-# Run the service
-CMD ["python", "server.py"] 
+# Run the gRPC service
+CMD ["python", "-m", "sbomai_ai.service"] 

@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useAIModelHealth, useSecurityInsights, useTrendAnalysis, useManualApi } from '../hooks/useApi';
 
 interface Vulnerability {
   id: string;
@@ -43,159 +44,149 @@ const AIAnalysis: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFixPlan, setSelectedFixPlan] = useState<string | null>(null);
 
-  // Mock data for summary cards
-  const summaryData = {
-    analyzedSboms: 134,
-    criticalVulns: 23,
-    suggestions: 57
-  };
+  // Real API data hooks
+  const { data: modelHealth, loading: healthLoading, error: healthError, execute: fetchModelHealth } = useAIModelHealth();
+  const { data: securityInsights, loading: insightsLoading, error: insightsError, execute: fetchSecurityInsights } = useSecurityInsights();
+  const { data: trendAnalysis, loading: trendLoading, error: trendError, execute: fetchTrendAnalysis } = useTrendAnalysis(parseInt(dateRange));
+  const { data: vulnerabilities, loading: vulnLoading, error: vulnError, execute: fetchVulnerabilities } = useManualApi();
 
-  // Mock data for AI-Prioritized Vulnerabilities
-  const vulnerabilities: Vulnerability[] = [
-    {
-      id: 'CVE-2023-1234',
-      severity: 'High',
-      aiSuggestion: 'Upgrade to v1.5.2',
-      component: 'react',
-      affectedVersion: '18.2.0',
-      fixedVersion: '18.3.0',
-      status: 'open'
-    },
-    {
-      id: 'CVE-2022-5678',
-      severity: 'Critical',
-      aiSuggestion: 'Replace with safer lib',
-      component: 'lodash',
-      affectedVersion: '4.17.21',
-      fixedVersion: '4.17.22',
-      status: 'open'
-    },
-    {
-      id: 'CVE-2024-9012',
-      severity: 'Medium',
-      aiSuggestion: 'Apply patch from repo',
-      component: 'axios',
-      affectedVersion: '1.4.0',
-      status: 'open'
-    },
-    {
-      id: 'CVE-2023-3456',
-      severity: 'Critical',
-      aiSuggestion: 'Immediate upgrade required',
-      component: 'express',
-      affectedVersion: '4.18.2',
-      fixedVersion: '4.19.0',
-      status: 'fixed'
+  // Fetch data on component mount
+  useEffect(() => {
+    fetchModelHealth();
+    fetchSecurityInsights();
+    fetchTrendAnalysis();
+    // Fetch vulnerabilities data
+    fetchVulnerabilities(() => 
+      fetch('/api/v1/vulnerabilities?severity=CRITICAL&page=0&size=10')
+        .then(res => res.json())
+        .then(data => data.data || [])
+    );
+  }, [fetchModelHealth, fetchSecurityInsights, fetchTrendAnalysis, fetchVulnerabilities, dateRange]);
+
+  // Real data for summary cards
+  const summaryData = useMemo(() => {
+    if (insightsLoading || healthLoading) {
+      return { analyzedSboms: 0, criticalVulns: 0, suggestions: 0 };
     }
-  ];
 
-  // Mock data for Dependency Intelligence
-  const dependencies: Dependency[] = [
-    {
-      name: 'log4j-core',
-      usageTrend: 'trending_down',
-      riskScore: 92,
-      riskLevel: 'High',
-      fixAction: 'patch',
-      currentVersion: '2.17.0',
-      recommendedVersion: '2.20.0'
-    },
-    {
-      name: 'lodash',
-      usageTrend: 'stable',
-      riskScore: 30,
-      riskLevel: 'Low',
-      fixAction: 'ignore',
-      currentVersion: '4.17.21'
-    },
-    {
-      name: 'express',
-      usageTrend: 'trending_up',
-      riskScore: 70,
-      riskLevel: 'Medium',
-      fixAction: 'upgrade',
-      currentVersion: '4.18.2',
-      recommendedVersion: '4.19.0'
-    },
-    {
-      name: 'moment',
-      usageTrend: 'trending_down',
-      riskScore: 85,
-      riskLevel: 'High',
-      fixAction: 'replace',
-      currentVersion: '2.29.4',
-      replacement: 'dayjs'
+    return {
+      analyzedSboms: securityInsights?.analyzedSboms || 0,
+      criticalVulns: securityInsights?.criticalVulns || 0,
+      suggestions: securityInsights?.aiSuggestions || 0
+    };
+  }, [securityInsights, insightsLoading, healthLoading]);
+
+  // Real data for AI-Prioritized Vulnerabilities
+  const vulnerabilityData = useMemo(() => {
+    if (vulnLoading || !vulnerabilities) {
+      return [];
     }
-  ];
 
-  // Mock data for AI Recommendations & Fix Plans
-  const fixPlans: FixPlan[] = [
-    {
-      id: 'plan-001',
-      sbomId: 'frontend-api.json',
-      actions: [
-        {
-          type: 'upgrade',
-          package: 'axios',
-          description: 'Upgrade to latest secure version',
-          currentVersion: '1.4.0',
-          targetVersion: '1.6.0'
-        },
-        {
-          type: 'remove',
-          package: 'debug',
-          description: 'Remove unused debug package'
-        },
-        {
-          type: 'replace',
-          package: 'moment',
-          description: 'Replace with lighter alternative',
-          currentVersion: '2.29.4',
-          replacement: 'dayjs'
-        }
-      ],
-      estimatedTime: '2 hours',
-      riskLevel: 'Low'
-    },
-    {
-      id: 'plan-002',
-      sbomId: 'backend-service.json',
-      actions: [
-        {
-          type: 'upgrade',
-          package: 'express',
-          description: 'Critical security upgrade',
-          currentVersion: '4.18.2',
-          targetVersion: '4.19.0'
-        },
-        {
-          type: 'add',
-          package: 'helmet',
-          description: 'Add security headers middleware'
-        }
-      ],
-      estimatedTime: '1 hour',
-      riskLevel: 'Medium'
+    return vulnerabilities.map((vuln: any) => ({
+      id: vuln.cveId,
+      severity: vuln.severity === 'CRITICAL' ? 'Critical' : 
+                vuln.severity === 'HIGH' ? 'High' : 
+                vuln.severity === 'MEDIUM' ? 'Medium' : 'Low',
+      aiSuggestion: vuln.aiSuggestion || 'Review and update',
+      component: vuln.componentName || 'Unknown',
+      affectedVersion: vuln.affectedVersions || 'Unknown',
+      fixedVersion: vuln.fixedVersions,
+      status: vuln.status === 'FIXED' ? 'fixed' : 
+              vuln.status === 'IGNORED' ? 'ignored' : 'open'
+    }));
+  }, [vulnerabilities, vulnLoading]);
+
+  // Real data for Dependency Intelligence
+  const dependencyData = useMemo(() => {
+    if (insightsLoading || !securityInsights) {
+      return [];
     }
-  ];
 
-  // Filter vulnerabilities
+    return securityInsights.dependencies || [];
+  }, [securityInsights, insightsLoading]);
+
+  // Real data for AI Recommendations & Fix Plans
+  const fixPlans = useMemo(() => {
+    if (insightsLoading || !securityInsights) {
+      return [];
+    }
+
+    return securityInsights.fixPlans || [];
+  }, [securityInsights, insightsLoading]);
+
+  // Filter vulnerabilities based on search and filters
   const filteredVulnerabilities = useMemo(() => {
-    return vulnerabilities.filter(vuln => {
-      const matchesSeverity = severityFilter === 'all' || vuln.severity === severityFilter;
-      const matchesStatus = !showRemediatedOnly || vuln.status === 'open';
-      return matchesSeverity && matchesStatus;
-    });
-  }, [vulnerabilities, severityFilter, showRemediatedOnly]);
+    let filtered = vulnerabilityData;
 
-  // Filter dependencies
-  const filteredDependencies = useMemo(() => {
-    return dependencies.filter(dep => {
-      const matchesSearch = dep.name.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesStatus = !showRemediatedOnly || dep.fixAction !== 'ignore';
-      return matchesSearch && matchesStatus;
-    });
-  }, [dependencies, searchTerm, showRemediatedOnly]);
+    if (severityFilter !== 'all') {
+      filtered = filtered.filter(v => v.severity.toLowerCase() === severityFilter.toLowerCase());
+    }
+
+    if (showRemediatedOnly) {
+      filtered = filtered.filter(v => v.status === 'fixed');
+    }
+
+    if (searchTerm) {
+      filtered = filtered.filter(v => 
+        v.component.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        v.id.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    return filtered;
+  }, [vulnerabilityData, severityFilter, showRemediatedOnly, searchTerm]);
+
+  // Loading state
+  if (healthLoading && insightsLoading && trendLoading && vulnLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 p-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-1/4 mb-6"></div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="bg-white p-6 rounded-lg shadow">
+                  <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+                  <div className="h-8 bg-gray-200 rounded w-1/3"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (healthError || insightsError || trendError || vulnError) {
+    return (
+      <div className="min-h-screen bg-gray-50 p-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <h3 className="text-red-800 font-medium">Error loading AI analysis data</h3>
+            <p className="text-red-600 mt-1">
+              {healthError || insightsError || trendError || vulnError}
+            </p>
+            <button 
+              onClick={() => {
+                fetchModelHealth();
+                fetchSecurityInsights();
+                fetchTrendAnalysis();
+                fetchVulnerabilities(() => 
+                  fetch('/api/v1/vulnerabilities?severity=CRITICAL&page=0&size=10')
+                    .then(res => res.json())
+                    .then(data => data.data || [])
+                );
+              }}
+              className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Get severity styles
   const getSeverityStyles = (severity: string) => {
@@ -477,7 +468,7 @@ const AIAnalysis: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                {filteredDependencies.map((dep) => {
+                {dependencyData.map((dep) => {
                   const riskStyles = getRiskLevelStyles(dep.riskLevel);
                   return (
                     <tr key={dep.name} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">

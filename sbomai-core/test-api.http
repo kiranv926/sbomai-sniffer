@@ -1,0 +1,186 @@
+### SBOM AI API Test Collection
+### This file contains all API endpoints for testing
+
+### Variables
+@baseUrl = http://localhost:8080/api/v1
+@projectId = {{createProject.response.body.id}}
+
+### 1. Health Checks
+
+### Check Application Health
+GET {{baseUrl}}/actuator/health
+Content-Type: application/json
+
+### Check Parser Health
+GET {{baseUrl}}/health/parser
+Content-Type: application/json
+
+### Check System Health
+GET {{baseUrl}}/health/system
+Content-Type: application/json
+
+### 2. Project Management
+
+### List All Projects
+GET {{baseUrl}}/projects?page=0&size=10&sortBy=name&sortOrder=asc
+Content-Type: application/json
+
+### List Projects with Filters
+GET {{baseUrl}}/projects?search=java&status=active&team=Backend%20Team&page=0&size=5
+Content-Type: application/json
+
+### Create New Project
+# @name createProject
+POST {{baseUrl}}/projects
+Content-Type: application/json
+
+{
+  "name": "test-project-api",
+  "description": "A test project for API validation",
+  "version": "1.0.0",
+  "classifier": "Application",
+  "tags": ["test", "api", "spring"],
+  "team": "Test Team",
+  "language": "Java",
+  "repository": {
+    "url": "https://github.com/test/test-project",
+    "type": "github",
+    "branch": "main"
+  }
+}
+
+### Get Project Details
+GET {{baseUrl}}/projects/{{projectId}}
+Content-Type: application/json
+
+### Update Project
+PUT {{baseUrl}}/projects/{{projectId}}
+Content-Type: application/json
+
+{
+  "description": "Updated description for test project",
+  "version": "1.1.0",
+  "tags": ["test", "api", "spring", "updated"],
+  "active": true
+}
+
+### 3. SBOM Upload
+
+### Upload SBOM File
+POST {{baseUrl}}/projects/{{projectId}}/upload-sbom
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="test-sbom.json"
+Content-Type: application/json
+
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "metadata": {
+    "timestamp": "2024-01-15T10:30:00Z",
+    "tools": [
+      {
+        "vendor": "SBOM AI",
+        "name": "sbomai-parser-go",
+        "version": "1.0.0"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "spring-boot-starter-web",
+      "version": "3.1.0",
+      "purl": "pkg:maven/org.springframework.boot/spring-boot-starter-web@3.1.0"
+    }
+  ]
+}
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### 4. Project Scans
+
+### Get Project Scans
+GET {{baseUrl}}/projects/{{projectId}}/scans?page=0&size=10&status=completed
+Content-Type: application/json
+
+### 5. Project Vulnerabilities
+
+### Get Project Vulnerabilities
+GET {{baseUrl}}/projects/{{projectId}}/vulnerabilities?page=0&size=10&severity=high
+Content-Type: application/json
+
+### 6. Project Dependencies
+
+### Get Project Dependencies
+GET {{baseUrl}}/projects/{{projectId}}/dependencies?page=0&size=10&type=library
+Content-Type: application/json
+
+### 7. Bulk Operations
+
+### Bulk Delete Projects
+POST {{baseUrl}}/projects/bulk-delete
+Content-Type: application/json
+
+[
+  "uuid1",
+  "uuid2",
+  "uuid3"
+]
+
+### Bulk Update Projects
+PUT {{baseUrl}}/projects/bulk-update
+Content-Type: application/json
+
+{
+  "projectIds": ["uuid1", "uuid2"],
+  "updates": {
+    "status": "ARCHIVED",
+    "active": false,
+    "team": "Archived Team"
+  }
+}
+
+### 8. Statistics
+
+### Get Project Statistics Summary
+GET {{baseUrl}}/projects/stats/summary
+Content-Type: application/json
+
+### Get High Risk Projects
+GET {{baseUrl}}/projects/stats/high-risk?minRiskScore=70
+Content-Type: application/json
+
+### 9. Error Testing
+
+### Test Invalid Project ID
+GET {{baseUrl}}/projects/invalid-uuid
+Content-Type: application/json
+
+### Test Duplicate Project Name
+POST {{baseUrl}}/projects
+Content-Type: application/json
+
+{
+  "name": "test-project-api",
+  "description": "Duplicate project name test",
+  "version": "1.0.0",
+  "classifier": "Application"
+}
+
+### Test Invalid SBOM Upload
+POST {{baseUrl}}/projects/{{projectId}}/upload-sbom
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="invalid.txt"
+Content-Type: text/plain
+
+This is not a valid SBOM file
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### 10. Cleanup
+
+### Delete Test Project
+DELETE {{baseUrl}}/projects/{{projectId}}
+Content-Type: application/json 

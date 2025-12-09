@@ -34,7 +34,6 @@
     <modules>
         <module>sbomai-common</module>
         <module>sbomai-core</module>
-        <module>sbomai-parser</module>
         <module>sbomai-vulnscan</module>
         <module>sbomai-policy</module>
         <module>sbomai-cli</module>

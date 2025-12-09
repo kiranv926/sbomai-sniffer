@@ -46,10 +46,10 @@ public class SbomComponent {
     @Column(name = "supplier")
     private String supplier;
     
-    @Column(name = "checksums", columnDefinition = "jsonb")
+    @Column(name = "checksums", columnDefinition = "TEXT")
     private String checksums;
     
-    @Column(name = "properties", columnDefinition = "jsonb")
+    @Column(name = "properties", columnDefinition = "TEXT")
     private String properties;
     
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -102,6 +102,12 @@ public class SbomComponent {
     
     public String getLicenseId() { return licenseId; }
     public void setLicenseId(String licenseId) { this.licenseId = licenseId; }
+    
+    public String getGroupId() { return author; } // Using author as groupId for now
+    public void setGroupId(String groupId) { this.author = groupId; }
+    
+    public String getLicense() { return licenseId; } // Alias for licenseId
+    public void setLicense(String license) { this.licenseId = license; }
     
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }

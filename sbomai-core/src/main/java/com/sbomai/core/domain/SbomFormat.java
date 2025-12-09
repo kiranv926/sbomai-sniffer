@@ -4,8 +4,13 @@ package com.sbomai.core.domain;
  * Enumeration of supported SBOM formats.
  */
 public enum SbomFormat {
+    UNKNOWN("Unknown", "Unknown format"),
     SPDX("SPDX", "Software Package Data Exchange"),
+    SPDX_JSON("SPDX_JSON", "SPDX JSON format"),
+    SPDX_XML("SPDX_XML", "SPDX XML format"),
     CYCLONEDX("CycloneDX", "CycloneDX BOM Standard"),
+    CYCLONEDX_JSON("CYCLONEDX_JSON", "CycloneDX JSON format"),
+    CYCLONEDX_XML("CYCLONEDX_XML", "CycloneDX XML format"),
     SWID("SWID", "Software Identification Tags");
 
     private final String code;

@@ -1,41 +1,76 @@
 ﻿# SBOMAI Core Application Properties for Testing
 # =============================================
 
-# Server Configuration
-server.port=8080
-server.servlet.context-path=/api/v1
+server:
+  port: 8081
+  servlet:
+    context-path: /api/v1
 
-# Database Configuration (H2 for testing)
-spring.datasource.url=jdbc:h2:mem:testdb
-spring.datasource.driver-class-name=org.h2.Driver
-spring.datasource.username=sa
-spring.datasource.password=
+spring:
+  application:
+    name: sbomai-core
+  
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
+    
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+    
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+      enabled: true
 
-# H2 Console
-spring.h2.console.enabled=true
-spring.h2.console.path=/h2-console
-
-# JPA Configuration
-spring.jpa.hibernate.ddl-auto=create-drop
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.format_sql=true
-spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
-
-# Disable Kafka for testing
-spring.kafka.bootstrap-servers=
-spring.kafka.consumer.group-id=
-spring.kafka.producer.key-serializer=
-spring.kafka.producer.value-serializer=
-
-# Microservice URLs (mock for testing)
-sbomai.parser.url=http://localhost:8081
-sbomai.analysis.url=http://localhost:8082
+# SBOM AI Configuration
+sbomai:
+  upload:
+    directory: ./uploads
+  parser:
+    go:
+      executable: ./sbomai-parser-go/sbomai-parser.exe
+      timeout: 30000
+  security:
+    cors:
+      allowed-origins: "*"
+      allowed-methods: "GET,POST,PUT,DELETE,OPTIONS"
+      allowed-headers: "*"
 
 # Logging Configuration
-logging.level.com.sbomai.core=INFO
-logging.level.org.springframework.web=INFO
-logging.level.org.hibernate.SQL=DEBUG
+logging:
+  level:
+    com.sbomai.core: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
 
 # Actuator Configuration
-management.endpoints.web.exposure.include=health,info,metrics
-management.endpoint.health.show-details=always
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true

@@ -3,7 +3,9 @@ version: '3.8'
 services:
   # API Gateway
   api-gateway:
-    build: ./sbomai-api-gateway
+    build:
+      context: .
+      dockerfile: ./sbomai-api-gateway/Dockerfile
     ports:
       - "8080:8080"  # REST/GraphQL
     environment:
@@ -14,11 +16,13 @@ services:
     depends_on:
       - redis
       - core
-      - ai-engine
+      - engine
 
   # Core Service
   core:
-    build: ./sbomai-core
+    build:
+      context: .
+      dockerfile: ./sbomai-core/Dockerfile
     ports:
       - "8081:8081"  # Internal API
     environment:
@@ -47,7 +51,9 @@ services:
 
   # Storage Service
   storage:
-    build: ./sbomai-storage
+    build:
+      context: .
+      dockerfile: ./sbomai-storage/Dockerfile
     ports:
       - "8082:8082"  # Internal API
     environment:
@@ -65,7 +71,9 @@ services:
 
   # Integrations Service
   integrations:
-    build: ./sbomai-integrations
+    build:
+      context: .
+      dockerfile: ./sbomai-integrations/Dockerfile
     ports:
       - "8083:8083"  # Internal API
     environment:

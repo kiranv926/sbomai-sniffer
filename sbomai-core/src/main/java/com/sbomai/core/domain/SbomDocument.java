@@ -22,7 +22,7 @@ public class SbomDocument {
     @Column(name = "spec_version", nullable = false)
     private String specVersion;
     
-    @Column(name = "raw_json", columnDefinition = "jsonb")
+    @Column(name = "raw_json", columnDefinition = "TEXT")
     private String rawJson;
     
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -68,4 +68,11 @@ public class SbomDocument {
     
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    
+    // Additional methods needed by other classes
+    public String getDocumentName() { return "SBOM-" + id.toString().substring(0, 8); }
+    public String getDocumentVersion() { return specVersion; }
+    public SbomFormat getSbomFormat() { return SbomFormat.fromCode(format); }
+    public LocalDateTime getCreatedDate() { return createdAt; }
+    public java.util.List<SbomComponent> getComponents() { return new java.util.ArrayList<>(); } // Placeholder
 }
